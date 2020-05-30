@@ -211,5 +211,11 @@ public class Product implements Serializable {
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "Product{" + "title=" + title + ", price=" + price + ", shortDescription=" + shortDescription + ", details=" + details + ", duration=" + duration + ", category=" + category + '}';
+    }
+        
             
 }
