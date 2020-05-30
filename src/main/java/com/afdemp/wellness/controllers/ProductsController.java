@@ -1,7 +1,9 @@
 package com.afdemp.wellness.controllers;
 
+import com.afdemp.wellness.entities.Product;
 import com.afdemp.wellness.service.AppService;
 import com.afdemp.wellness.service.ProductsService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -31,6 +33,14 @@ public class ProductsController {
         model.addAttribute("loggedinuser", appService.getPrincipal());        
         return "view_product";
     }
+    
+    @RequestMapping (value = { "/productsList"})
+    public String getAllProducts(ModelMap view){
+        List<Product> products = productsService.getAllProducts();
+        view.addAttribute("products", products);
+        return "list-products";
+    
+}
     
 
 }
