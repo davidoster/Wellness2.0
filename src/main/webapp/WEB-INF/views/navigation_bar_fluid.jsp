@@ -19,7 +19,7 @@
 <header>
     <nav class="container-fluid navbar navbar-expand-lg navbar-light" id="mainNav">
         <!-- Logo -->
-        <a class="navbar-brand" href="/BioEShop/">
+        <a class="navbar-brand" href="/wellness/">
             <img src="${pageContext.request.contextPath}/static/img/wellness.png" alt="Inspired logo"
                    style="position:relative; bottom:10px; width:100px; height:100px;">
         </a>
@@ -34,11 +34,11 @@
             <ul class="navbar-nav mr-auto">
 
                 <li class="nav-item active">
-                    <a class="nav-link" href="/BioEShop/">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/wellness/">Home <span class="sr-only">(current)</span></a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/BioEShop/about">About</a>
+                    <a class="nav-link" href="/wellness/about">About</a>
                 </li>
 
                 <li class="nav-item dropdown">
@@ -47,11 +47,11 @@
                         Products
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/BioEShop/categories/">Categories</a>
-                        <a class="dropdown-item" href="/BioEShop/products/">All products</a>
-                        <a class="dropdown-item" href="/BioEShop/products/cup">Nutrition</a>
-                        <a class="dropdown-item" href="/BioEShop/products/straw">Fitness</a>
-                     <!--   <a class="dropdown-item" href="/BioEShop/products/toothbrush">Toothbrushes</a> -->
+                        <a class="dropdown-item" href="/wellness/categories/">Categories</a>
+                        <a class="dropdown-item" href="/wellness/products/">All products</a>
+                        <a class="dropdown-item" href="/wellness/products/cup">Nutrition</a>
+                        <a class="dropdown-item" href="/wellness/products/straw">Fitness</a>
+                     
                     </div>
                 </li>
                 <li class="nav-item">
@@ -69,9 +69,9 @@
                             Admin
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="/BioEShop/admin/customers">Customers</a>
-                            <a class="dropdown-item" href="/BioEShop/admin/orders/pending">Pending Orders</a>
-                            <a class="dropdown-item" href="/BioEShop/admin/orders/done">Completed orders</a>
+                            <a class="dropdown-item" href="/wellness/admin/customers">Customers</a>
+                            <a class="dropdown-item" href="/wellness/admin/orders/pending">Pending Orders</a>
+                            <a class="dropdown-item" href="/wellness/admin/orders/done">Completed orders</a>
                         </div>
                     </li>
                 </sec:authorize>
@@ -84,12 +84,12 @@
                 <span class="glyphicon glyphicon-cog"></span>
                 <span class="caret"></span>
                 <sec:authorize access="hasRole('ADMIN')">
-                    <a href="/BioEShop/admin/profile">
+                    <a href="/wellness/admin/profile">
                         <i class="fas fa-user icon"></i>
                     </a>
                 </sec:authorize>
                 <sec:authorize access="!hasRole('ADMIN')">
-                    <a href="/BioEShop/user/profile">
+                    <a href="/wellness/user/profile">
                         <i class="fas fa-user icon"></i>
                     </a>
                 </sec:authorize>
@@ -104,13 +104,13 @@
                 </button>
                 <div class="dropdown-menu">
                     <sec:authorize access="hasRole('ADMIN') or hasRole('USER')">
-                        <a class="dropdown-item" href="/BioEShop/logout">Logout</a>
-                        <a class="dropdown-item" href="/BioEShop/chat">Chat</a>
+                        <a class="dropdown-item" href="/wellness/logout">Logout</a>
+                        <a class="dropdown-item" href="/wellness/chat">Chat</a>
                     </sec:authorize>
                     <sec:authorize access="!hasRole('ADMIN') and !hasRole('USER')">
-                        <a class="dropdown-item" href="/BioEShop/register">Resigster Now</a>
-                        <a class="dropdown-item" href="/BioEShop/login">Login</a>
-                        <a class="dropdown-item" href="/BioEShop/chat">Chat</a>
+                        <a class="dropdown-item" href="/wellness/register">Resigster Now</a>
+                        <a class="dropdown-item" href="/wellness/login">Login</a>
+                        <a class="dropdown-item" href="/wellness/chat">Chat</a>
                     </sec:authorize>
                 </div>
             </div>
@@ -128,7 +128,7 @@
                               <footer class="footer py-4">
                         <div class="container">
                             <div class="row align-items-center">
-                                <div class="col-lg-4 text-lg-left">Copyright © Inspired 2020</div>
+                                <div class="col-lg-4 text-lg-left">Copyright Â© Inspired 2020</div>
                                 <div class="col-lg-4 my-3 my-lg-0">
                                     <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a><a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a><a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
                                 </div>
