@@ -22,7 +22,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import org.springframework.transaction.annotation.Transactional;
 
-
 @Entity
 @Transactional
 @Table(name = "products", catalog = "wellness2.0", schema = "")
@@ -37,41 +36,34 @@ public class Product implements Serializable {
     private int productId;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 200)
-    @Column(nullable = false, length = 500)
-    private String path;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 200)
-    @Column(nullable = false, length = 200)
-    private String descr;
-    @Basic(optional = false)
-    @NotNull
-    @Column(nullable = false)
-    private int stock;
-    @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 45)
-    @Column(nullable = false, length = 45)
+    @Column(name = "title",nullable = false, length = 45)
     private String title;
     @Basic(optional = false)
     @NotNull
-    @Column(nullable = false)
+    @Column(name = "price",nullable = false)
     private double price;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "short_description",nullable = false, length = 200)
+    private String shortDescription;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 200)
+    @Column(name = "details",nullable = false, length = 500)
+    private String details;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "duration", nullable = false)
+    private int duration;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
     @Column(nullable = false, length = 45)
     private String category;
-    @Size(max = 45)
-    @Column(length = 45)
-    private String color;
-    @Size(max = 45)
-    @Column(length = 45)
-    private String size;
-    @Size(max = 45)
-    @Column(length = 45)
-    private String material;
+
+   
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "product", fetch = FetchType.LAZY)
     private List<OrderDetails> orderdetailsList;
@@ -83,99 +75,32 @@ public class Product implements Serializable {
         this.productId = productId;
     }
 
-    public Product(Integer productId, String path, String descr, int stock, String title, double price, String category) {
+    public Product(int productId, String title, double price, String shortDescription, String details, int duration, String category) {
         this.productId = productId;
-        this.path = path;
-        this.descr = descr;
-        this.stock = stock;
         this.title = title;
         this.price = price;
+        this.shortDescription = shortDescription;
+        this.details = details;
+        this.duration = duration;
         this.category = category;
     }
 
-    public Product(Integer productId, String path, String descr, int stock, String title, double price, String category, String color, String size, String material) {
-        this.productId = productId;
-        this.path = path;
-        this.descr = descr;
-        this.stock = stock;
+    public Product(String title, double price, String shortDescription, String details, int duration, String category, List<OrderDetails> orderdetailsList) {
         this.title = title;
         this.price = price;
-        this.category = category;
-        this.color = color;
-        this.size = size;
-        this.material = material;
-    }
-    
-    
-    // these are the minimum fields we need to create a nwe product, (according to the not null fields)
-    // this should be the constructor when creating a product, I guess
-    public Product(String path, String descr, int stock, String title, double price, String category) {
-        this.path = path;
-        this.descr = descr;
-        this.stock = stock;
-        this.title = title;
-        this.price = price;
-        this.category = category;
-    }
-
-    public Product(String path, String descr, int stock, String title, double price, String category, List<OrderDetails> orderdetailsList) {
-        this.path = path;
-        this.descr = descr;
-        this.stock = stock;
-        this.title = title;
-        this.price = price;
+        this.shortDescription = shortDescription;
+        this.details = details;
+        this.duration = duration;
         this.category = category;
         this.orderdetailsList = orderdetailsList;
     }
-    
-    
 
-    public Product(String path, String descr, int stock, String title, double price, String category, String color, String size, String material) {
-        this.path = path;
-        this.descr = descr;
-        this.stock = stock;
-        this.title = title;
-        this.price = price;
-        this.category = category;
-        this.color = color;
-        this.size = size;
-        this.material = material;
-    }
-
-    
-    
-    
-
-    public Integer getProductId() {
+    public int getProductId() {
         return productId;
     }
 
-    public void setProductId(Integer productId) {
+    public void setProductId(int productId) {
         this.productId = productId;
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
-    }
-
-    public String getDescr() {
-        return descr;
-    }
-
-    public void setDescr(String descr) {
-        this.descr = descr;
-    }
-
-    public int getStock() {
-        return stock;
-    }
-
-    public void setStock(int stock) {
-        this.stock = stock;
     }
 
     public String getTitle() {
@@ -194,6 +119,30 @@ public class Product implements Serializable {
         this.price = price;
     }
 
+    public String getShortDescription() {
+        return shortDescription;
+    }
+
+    public void setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
     public String getCategory() {
         return category;
     }
@@ -202,31 +151,6 @@ public class Product implements Serializable {
         this.category = category;
     }
 
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
-    public String getSize() {
-        return size;
-    }
-
-    public void setSize(String size) {
-        this.size = size;
-    }
-
-    public String getMaterial() {
-        return material;
-    }
-
-    public void setMaterial(String material) {
-        this.material = material;
-    }
-
-    //@XmlTransient
     public List<OrderDetails> getOrderdetailsList() {
         return orderdetailsList;
     }
@@ -238,17 +162,14 @@ public class Product implements Serializable {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 59 * hash + this.productId;
-        hash = 59 * hash + Objects.hashCode(this.path);
-        hash = 59 * hash + Objects.hashCode(this.descr);
-        hash = 59 * hash + this.stock;
-        hash = 59 * hash + Objects.hashCode(this.title);
-        hash = 59 * hash + (int) (Double.doubleToLongBits(this.price) ^ (Double.doubleToLongBits(this.price) >>> 32));
-        hash = 59 * hash + Objects.hashCode(this.category);
-        hash = 59 * hash + Objects.hashCode(this.color);
-        hash = 59 * hash + Objects.hashCode(this.size);
-        hash = 59 * hash + Objects.hashCode(this.material);
-        hash = 59 * hash + Objects.hashCode(this.orderdetailsList);
+        hash = 67 * hash + this.productId;
+        hash = 67 * hash + Objects.hashCode(this.title);
+        hash = 67 * hash + (int) (Double.doubleToLongBits(this.price) ^ (Double.doubleToLongBits(this.price) >>> 32));
+        hash = 67 * hash + Objects.hashCode(this.shortDescription);
+        hash = 67 * hash + Objects.hashCode(this.details);
+        hash = 67 * hash + this.duration;
+        hash = 67 * hash + Objects.hashCode(this.category);
+        hash = 67 * hash + Objects.hashCode(this.orderdetailsList);
         return hash;
     }
 
@@ -267,31 +188,22 @@ public class Product implements Serializable {
         if (this.productId != other.productId) {
             return false;
         }
-        if (this.stock != other.stock) {
-            return false;
-        }
         if (Double.doubleToLongBits(this.price) != Double.doubleToLongBits(other.price)) {
             return false;
         }
-        if (!Objects.equals(this.path, other.path)) {
-            return false;
-        }
-        if (!Objects.equals(this.descr, other.descr)) {
+        if (this.duration != other.duration) {
             return false;
         }
         if (!Objects.equals(this.title, other.title)) {
             return false;
         }
+        if (!Objects.equals(this.shortDescription, other.shortDescription)) {
+            return false;
+        }
+        if (!Objects.equals(this.details, other.details)) {
+            return false;
+        }
         if (!Objects.equals(this.category, other.category)) {
-            return false;
-        }
-        if (!Objects.equals(this.color, other.color)) {
-            return false;
-        }
-        if (!Objects.equals(this.size, other.size)) {
-            return false;
-        }
-        if (!Objects.equals(this.material, other.material)) {
             return false;
         }
         if (!Objects.equals(this.orderdetailsList, other.orderdetailsList)) {
@@ -299,14 +211,5 @@ public class Product implements Serializable {
         }
         return true;
     }
-
-    
-
-    @Override
-    public String toString() {
-        return "Product{" + "productId=" + productId + ", path=" + path + ", descr=" + descr + ", stock=" + stock + ", title=" + title + ", price=" + price + ", category=" + category + ", color=" + color + ", size=" + size + ", material=" + material +'}';
-    }
-
-    
-    
+            
 }

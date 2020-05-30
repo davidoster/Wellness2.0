@@ -53,9 +53,9 @@ public class ProductsServiceImpl implements ProductsService {
         return pdao.deleteProductById(id);
     }
 
-    @Override
-    public boolean reduceProductStock(int id, int quantity) {
-        return pdao.reduceProductStock(id, quantity);
-    }
-    
+//    @Override
+//    public boolean reduceProductStock(int id, int quantity) {
+//        return pdao.reduceProductStock(id, quantity);
+//    }
+//    
 }

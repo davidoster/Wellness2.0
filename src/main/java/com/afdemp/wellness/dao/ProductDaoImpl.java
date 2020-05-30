@@ -75,16 +75,16 @@ public class ProductDaoImpl extends AbstractDao<Integer,Product> implements Prod
         }
     }
     
-    @Override
-    public boolean reduceProductStock(int id,int quantity){
-        try{
-            Product p = getByKey(id);
-            p.setStock(p.getStock()-quantity);
-            update(p);
-            return true;
-        }catch(Exception e){
-            return false;
-        }
-    }
+//    @Override
+//    public boolean reduceProductStock(int id,int quantity){
+//        try{
+//            Product p = getByKey(id);
+//            p.setStock(p.getStock()-quantity);
+//            update(p);
+//            return true;
+//        }catch(Exception e){
+//            return false;
+//        }
+//    }
     
 }

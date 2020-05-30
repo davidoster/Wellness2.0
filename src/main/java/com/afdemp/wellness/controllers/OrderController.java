@@ -135,14 +135,14 @@ public class OrderController {
             // for now it has only been tested with one
             Product p;
             int q;
-            for (int i = 0; i < orderLength; i++) {
-                p = productService.getProductById(pid.get(i));
-                q = quantity.get(i);
-                order.getOrderDetailsList().get(i).setProduct(p);
-                order.getOrderDetailsList().get(i).setQuantity(q);
-                p.setStock(p.getStock() - q);
-                productService.updateProduct(p);
-            }
+//            for (int i = 0; i < orderLength; i++) {
+//                p = productService.getProductById(pid.get(i));
+//                q = quantity.get(i);
+//                order.getOrderDetailsList().get(i).setProduct(p);
+//                order.getOrderDetailsList().get(i).setQuantity(q);
+//                p.setStock(p.getStock() - q);
+//                productService.updateProduct(p);
+//            }
             boolean created = orderService.createOrder(order);
             if (created) {
                 model.addAttribute("customerName", order.getCustomer().getFname());

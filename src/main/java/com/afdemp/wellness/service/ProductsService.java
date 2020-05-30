@@ -19,5 +19,5 @@ public interface ProductsService {
      public boolean addProduct(Product p);
      public boolean updateProduct(Product p);
      public boolean deleteProductById(int id);
-     public boolean reduceProductStock(int id,int quantity);
+//     public boolean reduceProductStock(int id,int quantity);
 }
