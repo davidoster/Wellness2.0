@@ -102,7 +102,7 @@
 
     <body>
         <div class="signup-form">
-            <form:form action="/wellness/${action}" method="POST" modelAttribute="user">
+            <form:form action="/Wellness/${action}" method="POST" modelAttribute="user">
                 <form:input type="hidden" path="id" id="id"/>
                 <h2>Register</h2>
                 <p class="hint-text">Create your account. It's free and only takes a minute.</p>
@@ -172,8 +172,8 @@
                         </c:otherwise>
                     </c:choose>
                 </div>
-                <div class="text-center " style="color: #5cb85c">Already have an account? <a href="/wellness/login">Sign in</a></div>
-                <div class="text-center " style="color: #5cb85c"><a href="/wellness/">Home</a></div>
+                <div class="text-center " style="color: #5cb85c">Already have an account? <a href="/Wellness/login">Sign in</a></div>
+                <div class="text-center " style="color: #5cb85c"><a href="/Wellness/">Home</a></div>
             </form:form>
         </div>
 
