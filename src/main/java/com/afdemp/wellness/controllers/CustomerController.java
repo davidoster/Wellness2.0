@@ -30,7 +30,7 @@ public class CustomerController {
     CustomerService customerService;
     
     @Autowired
-    Purchase odao;
+    IPurchaseDao odao;
     
     @RequestMapping(value = {"/customers"}, method = RequestMethod.GET)
     public String getProfile(ModelMap model) {

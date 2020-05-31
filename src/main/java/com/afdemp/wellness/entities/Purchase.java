@@ -110,6 +110,10 @@ public class Purchase implements Serializable {
         this.purchaseDetailsList = purchaseDetailsList;
     }
 
+    public void addPurchaseDetailsToList(PurchaseDetails pd){
+        this.purchaseDetailsList.add(pd);
+    }
+    
     public Customer getCustomer() {
         return customer;
     }

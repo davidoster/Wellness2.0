@@ -33,7 +33,7 @@ public class AdminController {
     CustomerService customerService;
 
     @Autowired
-    IPurchaseService orderService;
+    IPurchaseService purchaseService;
 
     @RequestMapping(value = {"/profile"}, method = RequestMethod.GET)
     public String getProfile(ModelMap model) {
@@ -232,9 +232,9 @@ public class AdminController {
     @RequestMapping(value = {"/order/edit/{id}"}, method = RequestMethod.GET)
     public String editOrder(ModelMap model, @PathVariable int id) {
         model.addAttribute("loggedinuser", appService.getPrincipal());
-        model.addAttribute("order", orderService.getOrderById(id));
+        model.addAttribute("order", purchaseService.getPurchaseById(id));   
         System.out.println("//////////////////////");
-        System.out.println(orderService.getOrderById(id));
+        System.out.println(purchaseService.getPurchaseById(id));
         model.addAttribute("action", "order/save");
         model.addAttribute("pagetitle", "Edit Order");
         return "view_edit_order";
@@ -242,7 +242,7 @@ public class AdminController {
 
     @RequestMapping(value = {"/order/delete/{id}"}, method = RequestMethod.GET)
     public String deleteOrder(ModelMap model, @PathVariable int id) {
-        if (orderService.deleteOrderById(id)) {
+        if (purchaseService.deletePurchaseById(id)){
             return "redirect:/admin/orders/pending";
         }
 

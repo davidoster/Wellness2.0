@@ -3,7 +3,6 @@ package com.afdemp.wellness.dao;
 import com.afdemp.wellness.entities.Product;
 import java.util.List;
 import org.hibernate.Criteria;
-import org.hibernate.Hibernate;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,8 +15,7 @@ public class ProductDaoImpl extends AbstractDao<Integer,Product> implements Prod
     @Override
     public List<Product> getAllProducts() {
         Criteria criteria = createEntityCriteria();
-        List<Product> products = (List<Product>) criteria.list();
-        return products;
+        return (List<Product>) criteria.list();
     }
 
     @Override

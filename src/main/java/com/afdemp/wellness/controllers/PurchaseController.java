@@ -45,7 +45,7 @@ public class PurchaseController {
     ProductDao pdao;
 
     @Autowired
-    Purchase odao;
+    IPurchaseDao odao;
 
     @RequestMapping(value = {"/buy/{id}"}, method = RequestMethod.GET)
     public String newOrder(ModelMap model, @PathVariable int id) {
@@ -86,7 +86,7 @@ public class PurchaseController {
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
-    public String newOrder(@ModelAttribute("order") Purchase order,
+    public String newOrder(@ModelAttribute("order") Purchase purchase,
             @RequestParam(value = "pid", required = false) List<Integer> pid,
             @RequestParam(value = "quantity", required = false) List<Integer> quantity,
             BindingResult result, ModelMap model) {
@@ -101,8 +101,8 @@ public class PurchaseController {
          * If the Order Id is null, then the new order is processed.
          * If not, then an existing order is updated.
          */
-        if (order.getOrderId() == null) {
-            Customer c = order.getCustomer();
+        if (purchase.getId() == null) {
+            Customer c = purchase.getCustomer();
             // If the customer buys as a visitor, he has null id
             if (c.getCustomerId() == null) {
                 // Checking if the visitor customer exists in the database, by the email he gave
@@ -112,23 +112,23 @@ public class PurchaseController {
                     c.setCustomerId(existingCustomer.getCustomerId());                        // setting customer for order
                 } else {
                     c.setCustomerId(customerService.saveCustomer(c));                        // setting customer for order
-                    order.setCustomer(c);
+                    purchase.setCustomer(c);
                 }
             }
             //set order time
             Date date = new Date(System.currentTimeMillis());
-            order.setDate(date);
+            purchase.setDate(date);
             // create a list of details
             int orderLength = pid.size();
             List<PurchaseDetails> list = new ArrayList();
             PurchaseDetails od;
             for (int i = 0; i < orderLength; i++) {
                 od = new PurchaseDetails();
-                od.setOrder(order);
+                od.setPurchase(purchase);
                 list.add(od);
             }
             // link the list with the order 
-            order.setOrderDetailsList(list);
+            purchase.setPurchaseDetailsList(list);
             // for every element in the list of order details we have to set the product and the quantity
             // theoretically we have a list of products and a list of quantitiew from the requests param
             // so this code might be expandable for an order with multiple products
@@ -145,8 +145,8 @@ public class PurchaseController {
 //            }
             boolean created = orderService.createPurchase(purchase);
             if (created) {
-                model.addAttribute("customerName", order.getCustomer().getFirstName());
-                model.addAttribute("orderNumber", order.getPurchaseId());
+                model.addAttribute("customerName", purchase.getCustomer().getFirstName());
+                model.addAttribute("orderNumber", purchase.getId());     
                 model.addAttribute("update", false);
                 model.addAttribute("loggedinuser", appService.getPrincipal());
             } else {
@@ -162,14 +162,14 @@ public class PurchaseController {
              * by the administrator.
              */
         } else {
-            Customer c = order.getCustomer();
+            Customer c = purchase.getCustomer();
             Customer existingCustomer = customerService.getCustomerById(c.getCustomerId());
             if(!(c.equals(existingCustomer))) {
                 existingCustomer = customerService.updateCustomer(c, existingCustomer);
-                order.setCustomer(existingCustomer);
+                purchase.setCustomer(existingCustomer);
             }
             
-            if(orderService.updatePurchase(order)) {
+            if(orderService.updatePurchase(purchase)) {
                 model.addAttribute("message", "The order was updated successfully");
                 model.addAttribute("update", true);
                 model.addAttribute("loggedinuser", appService.getPrincipal());
