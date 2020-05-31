@@ -1,4 +1,4 @@
-<%@include file="z1JSP_setup.jsp" %>
+<%@include file="setup.jsp" %>
 <html>
 
     <head>
@@ -13,35 +13,29 @@
                 background-image: url("${pageContext.request.contextPath}/static/img/body.jpg");
                 height: 500px;
             }
-
             .form-control {
                 height: 40px;
                 box-shadow: none;
                 color: #969fa4;
             }
-
             .form-control:focus {
                 border-color: #5cb85c;
             }
-
             .form-control,
             .btn {
                 border-radius: 3px;
             }
-
             .signup-form {
                 width: 400px;
                 margin: 0 auto;
                 padding: 30px 0;
             }
-
             .signup-form h2 {
                 color: #636363;
                 margin: 0 0 15px;
                 position: relative;
                 text-align: center;
             }
-
             .signup-form h2:before,
             .signup-form h2:after {
                 content: "";
@@ -52,21 +46,17 @@
                 top: 50%;
                 z-index: 2;
             }
-
             .signup-form h2:before {
                 left: 0;
             }
-
             .signup-form h2:after {
                 right: 0;
             }
-
             .signup-form .hint-text {
                 color: #999;
                 margin-bottom: 30px;
                 text-align: center;
             }
-
             .signup-form form {
                 color: #999;
                 border-radius: 3px;
@@ -75,44 +65,35 @@
                 box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
                 padding: 30px;
             }
-
             .signup-form .form-group {
                 margin-bottom: 20px;
             }
-
             .signup-form input[type="checkbox"] {
                 margin-top: 3px;
             }
-
             .signup-form .btn {
                 font-size: 16px;
                 font-weight: bold;
                 min-width: 140px;
                 outline: none !important;
             }
-
             .signup-form .row div:first-child {
                 padding-right: 10px;
             }
-
             .signup-form .row div:last-child {
                 padding-left: 10px;
             }
-
             .signup-form a {
                 color: #fff;
                 text-decoration: underline;
             }
-
             .signup-form a:hover {
                 text-decoration: none;
             }
-
             .signup-form form a {
                 color: #5cb85c;
                 text-decoration: none;
             }
-
             .signup-form form a:hover {
                 text-decoration: underline;
             }
@@ -121,7 +102,7 @@
 
     <body>
         <div class="signup-form">
-            <form:form action="/BioEShop/${action}" method="POST" modelAttribute="user">
+            <form:form action="/wellness/${action}" method="POST" modelAttribute="user">
                 <form:input type="hidden" path="id" id="id"/>
                 <h2>Register</h2>
                 <p class="hint-text">Create your account. It's free and only takes a minute.</p>
@@ -191,11 +172,11 @@
                         </c:otherwise>
                     </c:choose>
                 </div>
-                <div class="text-center " style="color: #5cb85c">Already have an account? <a href="/BioEShop/login">Sign in</a></div>
-                <div class="text-center " style="color: #5cb85c"><a href="/BioEShop/">Home</a></div>
+                <div class="text-center " style="color: #5cb85c">Already have an account? <a href="/wellness/login">Sign in</a></div>
+                <div class="text-center " style="color: #5cb85c"><a href="/wellness/">Home</a></div>
             </form:form>
         </div>
 
-        <%@include file="z4scriptsBeforeBody.jsp" %>
+        <%@include file="scripts.jsp" %>
     </body>
 </html>

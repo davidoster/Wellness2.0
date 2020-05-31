@@ -1,10 +1,6 @@
-<%-- 
-    Document   : view_order_success
-    Created on : Aug 6, 2019, 5:19:52 PM
-    Author     : giorgos
---%>
 
-<%@include file="z1JSP_setup.jsp" %>
+
+<%@include file="setup.jsp" %>
 <html>
     <head>
 
@@ -28,58 +24,28 @@
 
         <title>Access Denied</title>
 
-
-
-
-        <!-- Our CSS -->
-        <link href="<c:url value='/static/css/contact.css' />" type="text/css" rel="stylesheet"></link>
-        <link href="<c:url value='/static/css/style.css' />" type="text/css" rel="stylesheet"></link>
-        <style>
-            h1 {
-                background-color: black;
-                color: lightgoldenrodyellow;
-            }
-
-
-            body {
-                background-color: lightgoldenrodyellow;
-            }
-
-            nav {
-                background-color: lightgoldenrodyellow;
-            }
-
-            .color {
-                background-color: lightgreen;
-            }
-
-            .gr {
-                background-color: greenyellow;
-            }
-
-            .ran {
-                flex-grow: unset;
-                background-color: rgb(219, 219, 130);
-                color: rgb(6, 8, 6);
-            }
-        </style>
+        <link href="<c:url value='/static/css/styles.css' />" type="text/css" rel="stylesheet"></link>
+        
+      
     </head>
     <body>
-        <%@include file="z5HTML_NavBar_Menu.jsp" %>
+        <%@include file="nav.jsp" %>
         <main>
-
+  <header class="masthead">
+    <div class="container"> 
+        <section class="page-section bg-light" id="accessDenied">
             <div class="container">
-                <div class="row ">
-
-                    <div class="mx-auto d-block text-center" style="width:50%;">
-                        <h2 class="text-danger">You are not authorised</h2>
-                        <div class="card">
-                            <img src="${pageContext.request.contextPath}/static/img/access_denied.jpg" alt="access denied" class="card-img-top">
-                        </div>
-                    </div>
-                </div>
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Access denied</h2>
+                    <h3 class="section-subheading text-warning"> Sorry you are not authorised.</h3>
+                </div> <!---class-->
+                
+            </div> <!--container-->
+            </section>
+            </div>
+</header>            
         </main>
-        <%@include file="z5HTML_Footer.jsp" %>
-        <%@include file="z4scriptsBeforeBody.jsp" %>
+        <%@include file="footer.jsp" %>
+        <%@include file="scripts.jsp" %>
     </body>
 </html>
