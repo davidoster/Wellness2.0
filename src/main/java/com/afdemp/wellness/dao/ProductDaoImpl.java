@@ -17,12 +17,6 @@ public class ProductDaoImpl extends AbstractDao<Integer,Product> implements Prod
     public List<Product> getAllProducts() {
         Criteria criteria = createEntityCriteria();
         List<Product> products = (List<Product>) criteria.list();
-        //exw afairesei po tin toString ti lista
-        //an xreiastei kse-sxoliazoume auto to kommati
-        
-//        for (Product p : products){
-//            Hibernate.initialize(p.getOrderdetailsList());
-//        }
         return products;
     }
 
