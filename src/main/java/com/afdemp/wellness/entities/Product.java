@@ -32,7 +32,7 @@ public class Product implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "product_id", nullable = false)
+    @Column(name = "id", nullable = false)
     private int productId;
     @Basic(optional = false)
     @NotNull
@@ -66,7 +66,7 @@ public class Product implements Serializable {
    
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "product", fetch = FetchType.LAZY)
-    private List<PurchaseDetails> orderdetailsList;
+    private List<PurchaseDetails> purchaseDetailsList;
 
     public Product() {
     }
@@ -92,7 +92,7 @@ public class Product implements Serializable {
         this.details = details;
         this.duration = duration;
         this.category = category;
-        this.orderdetailsList = orderdetailsList;
+        this.purchaseDetailsList = purchaseDetailsList;
     }
 
     public int getProductId() {
@@ -152,11 +152,11 @@ public class Product implements Serializable {
     }
 
     public List<PurchaseDetails> getOrderdetailsList() {
-        return orderdetailsList;
+        return purchaseDetailsList;
     }
 
-    public void setOrderdetailsList(List<PurchaseDetails> orderdetailsList) {
-        this.orderdetailsList = orderdetailsList;
+    public void setOrderdetailsList(List<PurchaseDetails> purchaseDetailsList) {
+        this.purchaseDetailsList = purchaseDetailsList;
     }
 
     @Override
@@ -169,7 +169,7 @@ public class Product implements Serializable {
         hash = 67 * hash + Objects.hashCode(this.details);
         hash = 67 * hash + this.duration;
         hash = 67 * hash + Objects.hashCode(this.category);
-        hash = 67 * hash + Objects.hashCode(this.orderdetailsList);
+        hash = 67 * hash + Objects.hashCode(this.purchaseDetailsList);
         return hash;
     }
 
@@ -206,7 +206,7 @@ public class Product implements Serializable {
         if (!Objects.equals(this.category, other.category)) {
             return false;
         }
-        if (!Objects.equals(this.orderdetailsList, other.orderdetailsList)) {
+        if (!Objects.equals(this.purchaseDetailsList, other.purchaseDetailsList)) {
             return false;
         }
         return true;
@@ -214,7 +214,7 @@ public class Product implements Serializable {
 
     @Override
     public String toString() {
-        return "Product{" + "productId=" + productId + ", title=" + title + ", price=" + price + ", shortDescription=" + shortDescription + ", details=" + details + ", duration=" + duration + ", category=" + category + ", orderdetailsList=" + orderdetailsList + '}';
+        return "Product{" + "productId=" + productId + ", title=" + title + ", price=" + price + ", shortDescription=" + shortDescription + ", details=" + details + ", duration=" + duration + ", category=" + category + ", orderdetailsList=" + purchaseDetailsList + '}';
     }
 
     

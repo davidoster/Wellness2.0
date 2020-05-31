@@ -34,11 +34,11 @@ public class ProductsController {
         return "view_product";
     }
     
-    @RequestMapping (value = { "/productsList"})
+    @RequestMapping (value = { "/", "/productsList"}, method = RequestMethod.GET)
     public String getAllProducts(ModelMap view){
         List<Product> products = productsService.getAllProducts();
         view.addAttribute("products", products);
-        return "list-products";
+        return ("listofproducts");
     
 }
     
