@@ -6,7 +6,7 @@
 <header>
     <nav class="container-fluid navbar navbar-expand-lg navbar-light" id="mainNav">
         <!-- Logo -->
-        <a class="navbar-brand" href="/wellness/">
+        <a class="navbar-brand" href="/Wellness/">
             <img src="${pageContext.request.contextPath}/static/img/wellness.png" alt="Inspired logo"
                  style="position:relative; bottom:10px; width:100px; height:100px;">
         </a>
@@ -56,16 +56,16 @@
                             Admin
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="/wellness/admin/customers">Customers</a>
-                            <a class="dropdown-item" href="/wellness/admin/orders/pending">Pending Orders</a>
-                            <a class="dropdown-item" href="/wellness/admin/orders/done">Completed orders</a>
+                            <a class="dropdown-item" href="/Wellness/admin/customers">Customers</a>
+                            <a class="dropdown-item" href="/Wellness/admin/orders/pending">Pending Orders</a>
+                            <a class="dropdown-item" href="/Wellness/admin/orders/done">Completed orders</a>
                         </div>
                     </li>
                 </sec:authorize>
 
             </ul>
 
-            <%@include file="z3authheader.jsp" %>
+            <%@include file="authheader.jsp" %>
             <!--Profile button -->
             <button type="button" class="btn">
                 <span class="glyphicon glyphicon-cog"></span>
