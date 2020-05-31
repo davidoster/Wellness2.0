@@ -22,7 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
-    private CustomerDao cdao;
+    private CustomerDao dao;
 
     @Override
     public boolean createCustomer(Customer c) {
@@ -31,22 +31,22 @@ public class CustomerServiceImpl implements CustomerService {
     
     @Override
     public int saveCustomer(Customer c){
-        return cdao.saveCustomer(c);
+        return dao.saveCustomer(c);
     }
 
     @Override
     public Customer getCustomerByEmail(String email) {
-        return cdao.getCustomerByEmail(email);
+        return dao.getCustomerByEmail(email);
     }
 
     @Override
     public Customer getCustomerById(int id) {
-        return cdao.getCustomerById(id);
+        return dao.getCustomerById(id);
     }
 
     @Override
     public boolean updateCustomer(Customer c) {
-        return cdao.updateCustomer(c);
+        return dao.updateCustomer(c);
     }
 
     public boolean isEmailUnique(Integer id, String email) {
@@ -56,7 +56,7 @@ public class CustomerServiceImpl implements CustomerService {
     
     @Override
     public Customer getCustomerBySsoId(String ssoId){
-        return cdao.getCustomerBySsoId(ssoId);
+        return dao.getCustomerBySsoId(ssoId);
     }
     
     /**
@@ -70,22 +70,22 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Customer updateCustomer(Customer newCustomer, Customer oldCustomer) {
         oldCustomer.setAddress(newCustomer.getAddress());
-        oldCustomer.setFname(newCustomer.getFname());
-        oldCustomer.setLname(newCustomer.getLname());
+        oldCustomer.setFirstName(newCustomer.getFirstName());
+        oldCustomer.setLastName(newCustomer.getLastName());
         oldCustomer.setPhoneNumber(newCustomer.getPhoneNumber());
-        if(cdao.updateCustomer(oldCustomer)) {
-            return cdao.getCustomerById(oldCustomer.getCustomerId());
+        if(dao.updateCustomer(oldCustomer)) {
+            return dao.getCustomerById(oldCustomer.getCustomerId());
         }
         return null;
     }
 
     @Override
     public List<Customer> getAllCustomers() {
-        return cdao.getAllCustomers();
+        return dao.getAllCustomers();
     }
 
     @Override
     public boolean deleteCustomerById(int id) {
-        return cdao.deleteCustomerById(id);
+        return dao.deleteCustomerById(id);
     }
 }

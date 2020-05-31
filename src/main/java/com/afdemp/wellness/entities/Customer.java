@@ -28,23 +28,23 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 @Table(name = "customers", catalog = "wellness2.0", schema = "", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"email"})
-    , @UniqueConstraint(columnNames = {"phone_number"})})
-//@XmlRootElement
+    , @UniqueConstraint(columnNames = {"telephone"})})
+
 public class Customer implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Basic(optional = false)
-    @Column(name = "customer_id", nullable = false)
+    @Column(name = "id", nullable = false)
     private Integer customerId;
     @Size(max = 45)
-    @Column(length = 45)
-    private String fname;
+    @Column(name="first_name", length = 45)
+    private String firstName;
     @Size(max = 45)
-    @Column(length = 45)
-    private String lname;
-    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
+    @Column(name="last_name", length = 45)
+    private String lastName;
+   
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -54,7 +54,7 @@ public class Customer implements Serializable {
     @Column(length = 60)
     private String address;
     @Size(max = 45)
-    @Column(name = "phone_number", length = 45)
+    @Column(name = "telephone", length = 45)
     private String phoneNumber;
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer", fetch = FetchType.LAZY)
@@ -75,15 +75,15 @@ public class Customer implements Serializable {
         this.email = email;
     }
 
-    public Customer(String fname, String lname, String email) {
-        this.fname = fname;
-        this.lname = lname;
+    public Customer(String fname, String lastName, String email) {
+        this.firstName = fname;
+        this.lastName = lastName;
         this.email = email;
     }
 
-    public Customer(String fname, String lname, String email, String address, String phoneNumber) {
-        this.fname = fname;
-        this.lname = lname;
+    public Customer(String fname, String lastName, String email, String address, String phoneNumber) {
+        this.firstName = fname;
+        this.lastName = lastName;
         this.email = email;
         this.address = address;
         this.phoneNumber = phoneNumber;
@@ -97,20 +97,20 @@ public class Customer implements Serializable {
         this.customerId = customerId;
     }
 
-    public String getFname() {
-        return fname;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFname(String fname) {
-        this.fname = fname;
+    public void setFirstName(String fname) {
+        this.firstName = fname;
     }
 
-    public String getLname() {
-        return lname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLname(String lname) {
-        this.lname = lname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {
@@ -159,8 +159,8 @@ public class Customer implements Serializable {
     public int hashCode() {
         int hash = 7;
         hash = 41 * hash + Objects.hashCode(this.customerId);
-        hash = 41 * hash + Objects.hashCode(this.fname);
-        hash = 41 * hash + Objects.hashCode(this.lname);
+        hash = 41 * hash + Objects.hashCode(this.firstName);
+        hash = 41 * hash + Objects.hashCode(this.lastName);
         hash = 41 * hash + Objects.hashCode(this.email);
         hash = 41 * hash + Objects.hashCode(this.address);
         hash = 41 * hash + Objects.hashCode(this.phoneNumber);
@@ -181,10 +181,10 @@ public class Customer implements Serializable {
             return false;
         }
         final Customer other = (Customer) obj;
-        if (!Objects.equals(this.fname, other.fname)) {
+        if (!Objects.equals(this.firstName, other.firstName)) {
             return false;
         }
-        if (!Objects.equals(this.lname, other.lname)) {
+        if (!Objects.equals(this.lastName, other.lastName)) {
             return false;
         }
         if (!Objects.equals(this.email, other.email)) {
@@ -214,7 +214,7 @@ public class Customer implements Serializable {
 
     @Override
     public String toString() {
-        return "Customer{" + "customerId=" + customerId + ", fname=" + fname + ", lname=" + lname + ", email=" + email + ", address=" + address + ", phoneNumber=" + phoneNumber +'}';
+        return "Customer{" + "customerId=" + customerId + ", fname=" + firstName + ", lastName=" + lastName + ", email=" + email + ", address=" + address + ", phoneNumber=" + phoneNumber +'}';
     }
 
     

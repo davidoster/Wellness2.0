@@ -145,7 +145,7 @@ public class OrderController {
 //            }
             boolean created = orderService.createOrder(order);
             if (created) {
-                model.addAttribute("customerName", order.getCustomer().getFname());
+                model.addAttribute("customerName", order.getCustomer().getFirstName());
                 model.addAttribute("orderNumber", order.getOrderId());
                 model.addAttribute("update", false);
                 model.addAttribute("loggedinuser", appService.getPrincipal());
