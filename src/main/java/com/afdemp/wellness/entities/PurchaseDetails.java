@@ -24,9 +24,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Entity
 @Transactional
-@Table(name="orderdetails", catalog = "wellness2.0", schema = "", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"order_id", "product_id"})})
-//@XmlRootElement
+@Table(name="purchase_details", catalog = "wellness2.0", schema = "", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"purchase_id", "product_id"})})
+
 
 public class PurchaseDetails implements Serializable {
 
@@ -34,14 +34,14 @@ public class PurchaseDetails implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "od_id", nullable = false)
-    private Integer odId;
+    @Column(name = "id", nullable = false)
+    private Integer id;
     @Basic(optional = false)
     private int quantity;
     @JsonIgnore
-    @JoinColumn(name = "order_id", referencedColumnName = "order_id", nullable = false)
+    @JoinColumn(name = "purchase_id", referencedColumnName = "purchase_id", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    private Purchase order;
+    private Purchase purchase;
     @JoinColumn(name = "product_id", referencedColumnName = "product_id", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Product product;
@@ -49,38 +49,49 @@ public class PurchaseDetails implements Serializable {
     public PurchaseDetails() {
     }
 
-    public PurchaseDetails(Integer odId) {
-        this.odId = odId;
+    public PurchaseDetails(Integer id) {
+        this.id = id;
     }
 
-    public PurchaseDetails(Integer odId, int quantity) {
-        this.odId = odId;
+    public PurchaseDetails(Integer id, int quantity, Purchase purchase, Product product) {
+        this.id = id;
         this.quantity = quantity;
+        this.purchase = purchase;
+        this.product = product;
     }
 
-    public Integer getOdId() {
-        return odId;
+    public PurchaseDetails(Integer id, Purchase purchase) {
+        this.id = id;
+        this.purchase = purchase;
     }
 
-    public void setOdId(Integer odId) {
-        this.odId = odId;
+    public PurchaseDetails(Integer id, Product product) {
+        this.id = id;
+        this.product = product;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public int getQuantity() {
         return quantity;
     }
-    
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
-    public Purchase getOrder() {
-        return order;
+    public Purchase getPurchase() {
+        return purchase;
     }
 
-    public void setOrder(Purchase order) {
-        this.order = order;
+    public void setPurchase(Purchase purchase) {
+        this.purchase = purchase;
     }
 
     public Product getProduct() {
@@ -93,11 +104,11 @@ public class PurchaseDetails implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 59 * hash + Objects.hashCode(this.odId);
-        hash = 59 * hash + this.quantity;
-        hash = 59 * hash + Objects.hashCode(this.order);
-        hash = 59 * hash + Objects.hashCode(this.product);
+        int hash = 3;
+        hash = 43 * hash + Objects.hashCode(this.id);
+        hash = 43 * hash + this.quantity;
+        hash = 43 * hash + Objects.hashCode(this.purchase);
+        hash = 43 * hash + Objects.hashCode(this.product);
         return hash;
     }
 
@@ -116,10 +127,10 @@ public class PurchaseDetails implements Serializable {
         if (this.quantity != other.quantity) {
             return false;
         }
-        if (!Objects.equals(this.odId, other.odId)) {
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
-        if (!Objects.equals(this.order, other.order)) {
+        if (!Objects.equals(this.purchase, other.purchase)) {
             return false;
         }
         if (!Objects.equals(this.product, other.product)) {
@@ -128,15 +139,12 @@ public class PurchaseDetails implements Serializable {
         return true;
     }
 
-    
-
-    
-
     @Override
     public String toString() {
-        return "Orderdetails{" + "odId=" + odId + ", quantity=" + quantity + ", orderId=" + order + ", productId=" + product + '}';
+        return "PurchaseDetails{" + "id=" + id + ", quantity=" + quantity + ", purchase=" + purchase + ", product=" + product + '}';
     }
 
     
-    
+
+   
 }

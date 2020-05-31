@@ -7,7 +7,6 @@ import com.afdemp.wellness.entities.PurchaseDetails;
 import com.afdemp.wellness.entities.Product;
 import com.afdemp.wellness.service.AppService;
 import com.afdemp.wellness.service.CustomerService;
-import com.afdemp.wellness.service.OrderService;
 import com.afdemp.wellness.service.ProductsService;
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,7 +22,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import com.afdemp.wellness.dao.IPurchase;
+import com.afdemp.wellness.dao.IPurchaseDao;
+import com.afdemp.wellness.service.IPurchaseService;
 
 @Controller
 @RequestMapping("/order")
@@ -36,7 +36,7 @@ public class OrderController {
     CustomerService customerService;
     
     @Autowired
-    OrderService orderService;
+    IPurchaseService orderService;
 
     @Autowired
     ProductsService productService;
@@ -183,8 +183,8 @@ public class OrderController {
         }
     }
 //    @ModelAttribute("order")
-//    public IPurchase inorder(){
-//        return new IPurchase();
+//    public IPurchaseDao inorder(){
+//        return new IPurchaseDao();
 //    }
 
     

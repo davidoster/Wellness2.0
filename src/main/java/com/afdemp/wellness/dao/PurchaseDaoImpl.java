@@ -1,6 +1,7 @@
 package com.afdemp.wellness.dao;
-
+import com.afdemp.wellness.entities.Customer;
 import com.afdemp.wellness.entities.Purchase;
+import com.afdemp.wellness.entities.PurchaseDetails;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
@@ -9,9 +10,9 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 
-@Repository("odao")
+@Repository("purchaseDao")
 @Transactional
-public class PurchaseDaoImpl extends AbstractDao<Integer, Purchase> implements IPurchase {
+public class PurchaseDaoImpl extends AbstractDao<Integer,Purchase> implements IPurchaseDao {
     
     @Override
     public boolean createPurchase(Purchase purchase){
@@ -24,51 +25,51 @@ public class PurchaseDaoImpl extends AbstractDao<Integer, Purchase> implements I
     }
     
     @Override
-    public List<> getPurchaseForCustomerById(int id){
+    public List<Purchase> getPurchasesForCustomerById(int id){
         Criteria crit = createEntityCriteria();
         crit.add(Restrictions.eq("customer.customerId", id));
-        List<> list = (List<>) crit.list();
-        for (  p : list){
-            Hibernate.initialize(o.getOrderDetailsList());
+        List<Purchase> list = (List<Purchase>) crit.list();
+        for ( Purchase p : list){
+            Hibernate.initialize(p.getPurchaseDetailsList());
         } 
         return list;
     }
     
     @Override
-    public List<> getPendingPurchases(){
+    public List<Purchase> getPendingPurchases(){
         Criteria crit = createEntityCriteria();
         crit.add(Restrictions.eq("pending", (short)1));
-        List<> list = (List<>) crit.list();
-        for (  p : list){
-            Hibernate.initialize(p.getOrderDetailsList());
+        List<Purchase> list = (List<Purchase>) crit.list();
+        for ( Purchase p : list){
+            Hibernate.initialize(p.getPurchaseDetailsList());
         } 
         return list;
     }
     
     @Override
-    public List<> getDonePurchases(){
+    public List<Purchase> getDonePurchases(){
         Criteria crit = createEntityCriteria();
         crit.add(Restrictions.eq("pending", (short)0));
-        List<> list = (List<>) crit.list();
-        for (  p : list){
-            Hibernate.initialize(p.getOrderDetailsList());
+        List<Purchase> list = (List<Purchase>) crit.list();
+        for ( Purchase p : list){
+            Hibernate.initialize(p.getPurchaseDetailsList());
         } 
         return list;
     }
     
     @Override
-    public  getPurchaseById(int id){
+    public Purchase getPurchaseById(int id){
         Criteria crit = createEntityCriteria();
         crit.add(Restrictions.eq("purchaseId", id));
-         purchase = () crit.uniqueResult();
+        Purchase purchase = (Purchase) crit.uniqueResult();
         Hibernate.initialize(purchase.getPurchaseDetailsList());
         return purchase;
     }
     
     
     
-    public boolean deleteOrderById(int id){
-         purchase = getPurchaseById(id);
+    public boolean deletePurchaseById(int id){
+        Purchase purchase= getPurchaseById(id);
         try{
             delete(purchase);
             return true;
@@ -78,7 +79,7 @@ public class PurchaseDaoImpl extends AbstractDao<Integer, Purchase> implements I
         
     }
     
-    public boolean updatePurchase( purchase){
+    public boolean updatePurchase(Purchase purchase){
         try {
             update(purchase);
             return true;
@@ -86,5 +87,5 @@ public class PurchaseDaoImpl extends AbstractDao<Integer, Purchase> implements I
             return false;
         }
     }
-    
+
 }

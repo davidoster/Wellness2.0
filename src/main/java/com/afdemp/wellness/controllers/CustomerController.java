@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import com.afdemp.wellness.dao.IPurchase;
+import com.afdemp.wellness.dao.IPurchaseDao;
 
 
 @Controller

@@ -4,7 +4,6 @@ import com.afdemp.wellness.entities.Customer;
 import com.afdemp.wellness.entities.Product;
 import com.afdemp.wellness.service.AppService;
 import com.afdemp.wellness.service.CustomerService;
-import com.afdemp.wellness.service.OrderService;
 import com.afdemp.wellness.service.ProductsService;
 import java.util.List;
 import javax.validation.Valid;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import com.afdemp.wellness.service.IPurchaseService;
 
 
 @Controller
@@ -33,7 +33,7 @@ public class AdminController {
     CustomerService customerService;
 
     @Autowired
-    OrderService orderService;
+    IPurchaseService orderService;
 
     @RequestMapping(value = {"/profile"}, method = RequestMethod.GET)
     public String getProfile(ModelMap model) {

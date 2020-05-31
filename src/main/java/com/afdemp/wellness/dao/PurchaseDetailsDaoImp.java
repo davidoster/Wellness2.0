@@ -3,12 +3,12 @@ package com.afdemp.wellness.dao;
 import com.afdemp.wellness.entities.PurchaseDetails;
 
 
-public class OrderDetailsDaoImp extends AbstractDao<Integer,PurchaseDetails> implements OrderDetailsDao{
+public class PurchaseDetailsDaoImp extends AbstractDao<Integer,PurchaseDetails> implements IPurchaseDetailsDao{
     
     @Override
-    public boolean updateOrderDetails(PurchaseDetails od){
+    public boolean updatePurchaseDetails(PurchaseDetails purchaseDetails){
         try {
-            update(od);
+            update(purchaseDetails);
             return true;
         } catch (Exception e) {
             return false;
