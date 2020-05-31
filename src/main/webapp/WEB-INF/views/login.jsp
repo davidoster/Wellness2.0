@@ -1,37 +1,32 @@
-<%@include file="z1JSP_setup.jsp" %>
+<%@include file="setup.jsp" %>
 <html>
     <head>
-        <%@include file="z2HTML_Head.jsp" %>
-        
-        <!-- Our CSS -->
-        <style type="text/css">
+        <%@include file="head.jsp" %>
+         <link href="<c:url value='/static/css/styles.css' />" type="text/css" rel="stylesheet"></link>
+  
+        <style type>
             .login-form {
                 width: 340px;
                 margin: 50px auto;
             }
-
             .login-form form {
                 margin-bottom: 15px;
                 background: #f7f7f7;
                 box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
                 padding: 30px;
             }
-
             .login-form h2 {
                 margin: 0 0 15px;
             }
-
             .form-control,
             .btn {
                 min-height: 38px;
                 border-radius: 2px;
             }
-
             .btn {
                 font-size: 15px;
                 font-weight: bold;
             }
-
             body {
                 
                 height: 500px;
@@ -80,10 +75,10 @@
                 </div>
                 
                 <div class="form-group">
-                    <p class="text-center "><a style="color: #fed136" href="/BioEShop/register">Create an Account</a></p>
+                    <p class="text-center "><a style="color: #fed136" href="/Wellness/register">Create an Account</a></p>
                 </div>
                 <div class="form-group">
-                    <p class="text-center "><a style="color: #fed136" href="/BioEShop/categories/">Home</a></p>
+                    <p class="text-center "><a style="color: #fed136" href="/Wellness/categories/">Home</a></p>
                 </div>
 
 
@@ -92,8 +87,7 @@
             </form>
 
         </div>
-        <!-- end login form -->
-
+     
     </body>
     
 </html>
