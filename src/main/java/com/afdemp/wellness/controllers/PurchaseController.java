@@ -27,7 +27,7 @@ import com.afdemp.wellness.service.IPurchaseService;
 
 @Controller
 @RequestMapping("/order")
-public class OrderController {
+public class PurchaseController {
     
     @Autowired
     AppService appService;
@@ -64,7 +64,7 @@ public class OrderController {
         
 
         List<PurchaseDetails> list = new ArrayList();
-        o.setOrderDetailsList(list);
+        o.setPurchaseDetailsList(list);
 
         // se synthikes agoras pollaplwn proiontwn tha eftiaxna tosa
         // orderdetails objects osa kai ta diaforerikou eidous products tis paraggelias
@@ -73,7 +73,7 @@ public class OrderController {
 //        list.add(odetails);
 //        System.out.println("orderDetailsList:"+ list);
 
-        o.addOrderDetailsToList(odetails);
+        o.addPurchaseDetailsToList(odetails);
         o.setCustomer(c);
         o.setPending((short) 1);
 //        Hibernate.initialize(o.getOrderDetailsList());
@@ -143,10 +143,10 @@ public class OrderController {
 //                p.setStock(p.getStock() - q);
 //                productService.updateProduct(p);
 //            }
-            boolean created = orderService.createOrder(order);
+            boolean created = orderService.createPurchase(purchase);
             if (created) {
                 model.addAttribute("customerName", order.getCustomer().getFirstName());
-                model.addAttribute("orderNumber", order.getOrderId());
+                model.addAttribute("orderNumber", order.getPurchaseId());
                 model.addAttribute("update", false);
                 model.addAttribute("loggedinuser", appService.getPrincipal());
             } else {
@@ -169,7 +169,7 @@ public class OrderController {
                 order.setCustomer(existingCustomer);
             }
             
-            if(orderService.updateOrder(order)) {
+            if(orderService.updatePurchase(order)) {
                 model.addAttribute("message", "The order was updated successfully");
                 model.addAttribute("update", true);
                 model.addAttribute("loggedinuser", appService.getPrincipal());

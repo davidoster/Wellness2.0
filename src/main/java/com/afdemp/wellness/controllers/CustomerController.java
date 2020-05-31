@@ -90,7 +90,7 @@ public class CustomerController {
     public String getOrders(ModelMap model) {
             String username = appService.getPrincipal();
             int id = customerService.getCustomerBySsoId(username).getCustomerId();
-            List<Purchase> orders = odao.getOrdersForCustomerById(id);
+            List<Purchase> orders = odao.getPurchasesForCustomerById(id);
             model.addAttribute("orders",orders);
             model.addAttribute("loggedinuser", appService.getPrincipal());
             model.addAttribute("pagetitle", "My orders");
