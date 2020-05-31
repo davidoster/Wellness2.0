@@ -66,7 +66,7 @@ public class AppController {
     public String goHome(ModelMap model) {
         model.addAttribute("loggedinuser", appService.getPrincipal());
         model.addAttribute("pagetitle", "Pand-Eco");
-        return "view_landing_page";
+        return "homepage";
     }
 
     @RequestMapping(value = {"/categories/"}, method = RequestMethod.GET)

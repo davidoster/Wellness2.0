@@ -31,9 +31,14 @@ public class CustomerController {
     
     @Autowired
     OrderDao odao;
-
-    @RequestMapping(value = {"/profile"}, method = RequestMethod.GET)
+    
+    @RequestMapping(value = {"/customers"}, method = RequestMethod.GET)
     public String getProfile(ModelMap model) {
+        model.addAttribute("customers", customerService.getAllCustomers());
+        return "customers";
+    }
+    @RequestMapping(value = {"/profile"}, method = RequestMethod.GET)
+    public String getProfile2(ModelMap model) {
         model.addAttribute("loggedinuser", appService.getPrincipal());
         model.addAttribute("customer", customerService.getCustomerBySsoId(appService.getPrincipal()));
         model.addAttribute("pagetitle", "My profile");
