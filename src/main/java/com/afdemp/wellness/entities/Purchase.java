@@ -32,16 +32,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Entity
 @Transactional
-@Table(name = "orders", catalog = "wellness2.0", schema = "")
-//@XmlRootElement
-public class Order$ implements Serializable {
+@Table(name = "purchases", catalog = "wellness2.0", schema = "")
+
+public class Purchase implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "order_id", nullable = false)
-    private Integer orderId;
+    @Column(nullable = false)
+    private Integer id;
     @Basic(optional = false)
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -50,51 +50,40 @@ public class Order$ implements Serializable {
     @NotNull
     @Column(nullable = false)
     private short pending;
-    @Size(max = 200)
-    @Column(length = 200)
-    private String comments;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order", fetch = FetchType.LAZY)
-    private List<OrderDetails> orderDetailsList;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "purchase", fetch = FetchType.LAZY)
+    private List<PurchaseDetails> purchaseDetailsList;
   
     @JoinColumn(name = "customer_id", referencedColumnName = "customer_id", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Customer customer;
 
-    public Order$() {
+    public Purchase() {
     }
 
-    public Order$(Integer orderId) {
-        this.orderId = orderId;
-    }
-
-    public Order$(Integer orderId, Date date, short pending) {
-        this.orderId = orderId;
+    public Purchase(Integer id, Date date, short pending, List<PurchaseDetails> purchaseDetailsList, Customer customer) {
+        this.id = id;
         this.date = date;
         this.pending = pending;
-    }
-
-    public Order$(Date date, short pending, Customer customer) {
-        this.date = date;
-        this.pending = pending;
+        this.purchaseDetailsList = purchaseDetailsList;
         this.customer = customer;
     }
 
-    public Order$(Date date, short pending, String comments, Customer customer) {
+    public Purchase(Integer id, Date date, short pending, Customer customer) {
+        this.id = id;
         this.date = date;
         this.pending = pending;
-        this.comments = comments;
         this.customer = customer;
     }
     
     
 
-    public Integer getOrderId() {
-        return orderId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setOrderId(Integer orderId) {
-        this.orderId = orderId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Date getDate() {
@@ -113,31 +102,13 @@ public class Order$ implements Serializable {
         this.pending = pending;
     }
 
-    public String getComments() {
-        return comments;
+    public List<PurchaseDetails> getPurchaseDetailsList() {
+        return purchaseDetailsList;
     }
 
-    public void setComments(String comments) {
-        this.comments = comments;
+    public void setPurchaseDetailsList(List<PurchaseDetails> purchaseDetailsList) {
+        this.purchaseDetailsList = purchaseDetailsList;
     }
-    
-    //@XmlTransient
-    @Bean("list")
-    public List<OrderDetails> getOrderDetailsList() {
-        return orderDetailsList;
-    }
-
-    public void setOrderDetailsList(List<OrderDetails> orderdetailsList) {
-        this.orderDetailsList = orderdetailsList;
-    }
-    
-    
-    
-    public void addOrderDetailsToList(OrderDetails od){
-        this.orderDetailsList.add(od);
-    }
-    
-    
 
     public Customer getCustomer() {
         return customer;
@@ -150,12 +121,11 @@ public class Order$ implements Serializable {
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 97 * hash + Objects.hashCode(this.orderId);
-        hash = 97 * hash + Objects.hashCode(this.date);
-        hash = 97 * hash + this.pending;
-        hash = 97 * hash + Objects.hashCode(this.comments);
-        hash = 97 * hash + Objects.hashCode(this.orderDetailsList);
-        hash = 97 * hash + Objects.hashCode(this.customer);
+        hash = 61 * hash + Objects.hashCode(this.id);
+        hash = 61 * hash + Objects.hashCode(this.date);
+        hash = 61 * hash + this.pending;
+        hash = 61 * hash + Objects.hashCode(this.purchaseDetailsList);
+        hash = 61 * hash + Objects.hashCode(this.customer);
         return hash;
     }
 
@@ -170,20 +140,17 @@ public class Order$ implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Order$ other = (Order$) obj;
+        final Purchase other = (Purchase) obj;
         if (this.pending != other.pending) {
             return false;
         }
-        if (!Objects.equals(this.comments, other.comments)) {
-            return false;
-        }
-        if (!Objects.equals(this.orderId, other.orderId)) {
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         if (!Objects.equals(this.date, other.date)) {
             return false;
         }
-        if (!Objects.equals(this.orderDetailsList, other.orderDetailsList)) {
+        if (!Objects.equals(this.purchaseDetailsList, other.purchaseDetailsList)) {
             return false;
         }
         if (!Objects.equals(this.customer, other.customer)) {
@@ -192,14 +159,11 @@ public class Order$ implements Serializable {
         return true;
     }
 
-    
-
-    
-
     @Override
     public String toString() {
-        return "Order${" + "orderId=" + orderId + ", date=" + date + ", pending=" + pending + ", comments=" + comments +", customer=" + customer + '}';
+        return "Purchase{" + "id=" + id + ", date=" + date + ", pending=" + pending + ", purchaseDetailsList=" + purchaseDetailsList + ", customer=" + customer + '}';
     }
+
 
     
     

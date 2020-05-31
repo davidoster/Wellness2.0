@@ -2,7 +2,7 @@
 package com.afdemp.wellness.controllers;
 
 import com.afdemp.wellness.entities.Customer;
-import com.afdemp.wellness.entities.Order$;
+import com.afdemp.wellness.entities.Purchase;
 import com.afdemp.wellness.service.AppService;
 import com.afdemp.wellness.service.CustomerService;
 import com.afdemp.wellness.service.OrderService;
@@ -37,7 +37,7 @@ public class CustomerControllerREST {
     public ResponseEntity<Map<String, Object>> getOrders() {
         Map<String, Object> response = new HashMap();
         Customer customer = csrv.getCustomerBySsoId(appService.getPrincipal());
-        List<Order$> orders = osrv.getOrdersForCustomerById(customer.getCustomerId());
+        List<Purchase> orders = osrv.getOrdersForCustomerById(customer.getCustomerId());
         response.put("orders", orders);
 
         if (orders.isEmpty()) {

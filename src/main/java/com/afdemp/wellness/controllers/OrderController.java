@@ -1,10 +1,9 @@
 package com.afdemp.wellness.controllers;
 
-import com.afdemp.wellness.dao.OrderDao;
 import com.afdemp.wellness.dao.ProductDao;
 import com.afdemp.wellness.entities.Customer;
-import com.afdemp.wellness.entities.Order$;
-import com.afdemp.wellness.entities.OrderDetails;
+import com.afdemp.wellness.entities.Purchase;
+import com.afdemp.wellness.entities.PurchaseDetails;
 import com.afdemp.wellness.entities.Product;
 import com.afdemp.wellness.service.AppService;
 import com.afdemp.wellness.service.CustomerService;
@@ -24,6 +23,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import com.afdemp.wellness.dao.IPurchase;
 
 @Controller
 @RequestMapping("/order")
@@ -45,7 +45,7 @@ public class OrderController {
     ProductDao pdao;
 
     @Autowired
-    OrderDao odao;
+    Purchase odao;
 
     @RequestMapping(value = {"/buy/{id}"}, method = RequestMethod.GET)
     public String newOrder(ModelMap model, @PathVariable int id) {
@@ -59,16 +59,16 @@ public class OrderController {
             c = customerService.getCustomerBySsoId(username);
             isRegistered = true;
         }
-        Order$ o = new Order$();
+        Purchase o = new Purchase();
         Product p = productService.getProductById(id);
         
 
-        List<OrderDetails> list = new ArrayList();
+        List<PurchaseDetails> list = new ArrayList();
         o.setOrderDetailsList(list);
 
         // se synthikes agoras pollaplwn proiontwn tha eftiaxna tosa
         // orderdetails objects osa kai ta diaforerikou eidous products tis paraggelias
-        OrderDetails odetails = new OrderDetails();
+        PurchaseDetails odetails = new PurchaseDetails();
         odetails.setProduct(p);
 //        list.add(odetails);
 //        System.out.println("orderDetailsList:"+ list);
@@ -86,7 +86,7 @@ public class OrderController {
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
-    public String newOrder(@ModelAttribute("order") Order$ order,
+    public String newOrder(@ModelAttribute("order") Purchase order,
             @RequestParam(value = "pid", required = false) List<Integer> pid,
             @RequestParam(value = "quantity", required = false) List<Integer> quantity,
             BindingResult result, ModelMap model) {
@@ -120,10 +120,10 @@ public class OrderController {
             order.setDate(date);
             // create a list of details
             int orderLength = pid.size();
-            List<OrderDetails> list = new ArrayList();
-            OrderDetails od;
+            List<PurchaseDetails> list = new ArrayList();
+            PurchaseDetails od;
             for (int i = 0; i < orderLength; i++) {
-                od = new OrderDetails();
+                od = new PurchaseDetails();
                 od.setOrder(order);
                 list.add(od);
             }
@@ -183,8 +183,8 @@ public class OrderController {
         }
     }
 //    @ModelAttribute("order")
-//    public Order$ inorder(){
-//        return new Order$();
+//    public IPurchase inorder(){
+//        return new IPurchase();
 //    }
 
     

@@ -5,7 +5,7 @@
  */
 package com.afdemp.wellness.service;
 
-import com.afdemp.wellness.entities.Order$;
+import com.afdemp.wellness.entities.Purchase;
 import java.util.List;
 
 /**
@@ -14,18 +14,18 @@ import java.util.List;
  */
 public interface OrderService {
     
-    public boolean createOrder(Order$ o);
+    public boolean createOrder(Purchase o);
     
-    public List<Order$> getOrdersForCustomerById(int id);
+    public List<Purchase> getOrdersForCustomerById(int id);
     
-    public List<Order$> getPendingOrders();
+    public List<Purchase> getPendingOrders();
     
-    public List<Order$> getDoneOrders();
+    public List<Purchase> getDoneOrders();
     
-    public Order$ getOrderById(int id);
+    public Purchase getOrderById(int id);
     
     public boolean deleteOrderById(int id);
    
-    public boolean updateOrder(Order$ o);
+    public boolean updateOrder(Purchase o);
 
 }

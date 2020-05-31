@@ -66,7 +66,7 @@ public class Product implements Serializable {
    
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "product", fetch = FetchType.LAZY)
-    private List<OrderDetails> orderdetailsList;
+    private List<PurchaseDetails> orderdetailsList;
 
     public Product() {
     }
@@ -85,7 +85,7 @@ public class Product implements Serializable {
         this.category = category;
     }
 
-    public Product(String title, double price, String shortDescription, String details, int duration, String category, List<OrderDetails> orderdetailsList) {
+    public Product(String title, double price, String shortDescription, String details, int duration, String category, List<PurchaseDetails> orderdetailsList) {
         this.title = title;
         this.price = price;
         this.shortDescription = shortDescription;
@@ -151,11 +151,11 @@ public class Product implements Serializable {
         this.category = category;
     }
 
-    public List<OrderDetails> getOrderdetailsList() {
+    public List<PurchaseDetails> getOrderdetailsList() {
         return orderdetailsList;
     }
 
-    public void setOrderdetailsList(List<OrderDetails> orderdetailsList) {
+    public void setOrderdetailsList(List<PurchaseDetails> orderdetailsList) {
         this.orderdetailsList = orderdetailsList;
     }
 

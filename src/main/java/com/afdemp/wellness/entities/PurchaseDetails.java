@@ -28,7 +28,7 @@ import org.springframework.transaction.annotation.Transactional;
     @UniqueConstraint(columnNames = {"order_id", "product_id"})})
 //@XmlRootElement
 
-public class OrderDetails implements Serializable {
+public class PurchaseDetails implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -41,19 +41,19 @@ public class OrderDetails implements Serializable {
     @JsonIgnore
     @JoinColumn(name = "order_id", referencedColumnName = "order_id", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    private Order$ order;
+    private Purchase order;
     @JoinColumn(name = "product_id", referencedColumnName = "product_id", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Product product;
 
-    public OrderDetails() {
+    public PurchaseDetails() {
     }
 
-    public OrderDetails(Integer odId) {
+    public PurchaseDetails(Integer odId) {
         this.odId = odId;
     }
 
-    public OrderDetails(Integer odId, int quantity) {
+    public PurchaseDetails(Integer odId, int quantity) {
         this.odId = odId;
         this.quantity = quantity;
     }
@@ -75,11 +75,11 @@ public class OrderDetails implements Serializable {
         this.quantity = quantity;
     }
 
-    public Order$ getOrder() {
+    public Purchase getOrder() {
         return order;
     }
 
-    public void setOrder(Order$ order) {
+    public void setOrder(Purchase order) {
         this.order = order;
     }
 
@@ -112,7 +112,7 @@ public class OrderDetails implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final OrderDetails other = (OrderDetails) obj;
+        final PurchaseDetails other = (PurchaseDetails) obj;
         if (this.quantity != other.quantity) {
             return false;
         }

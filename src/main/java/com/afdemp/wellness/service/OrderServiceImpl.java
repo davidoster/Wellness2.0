@@ -5,12 +5,12 @@
  */
 package com.afdemp.wellness.service;
 
-import com.afdemp.wellness.dao.OrderDao;
-import com.afdemp.wellness.entities.Order$;
+import com.afdemp.wellness.entities.Purchase;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.afdemp.wellness.dao.IPurchase;
 
 /**
  *
@@ -21,30 +21,30 @@ import org.springframework.transaction.annotation.Transactional;
 public class OrderServiceImpl implements OrderService{
     
     @Autowired
-    private OrderDao odao;
+    private Purchase odao;
 
     @Override
-    public boolean createOrder(Order$ o) {
+    public boolean createOrder(Purchase o) {
         return odao.createOrder(o);
     }
 
     @Override
-    public List<Order$> getOrdersForCustomerById(int id) {
+    public List<Purchase> getOrdersForCustomerById(int id) {
         return odao.getOrdersForCustomerById(id);
     }
 
     @Override
-    public List<Order$> getPendingOrders() {
+    public List<Purchase> getPendingOrders() {
         return odao.getPendingOrders();
     }
 
     @Override
-    public List<Order$> getDoneOrders() {
+    public List<Purchase> getDoneOrders() {
         return odao.getDoneOrders();
     }
 
     @Override
-    public Order$ getOrderById(int id) {
+    public Purchase getOrderById(int id) {
         return odao.getOrderById(id);
     }
 
@@ -54,7 +54,7 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
-    public boolean updateOrder(Order$ o) {
+    public boolean updateOrder(Purchase o) {
         return odao.updateOrder(o);
     }
     

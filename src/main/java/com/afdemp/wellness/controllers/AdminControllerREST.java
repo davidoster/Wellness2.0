@@ -1,6 +1,6 @@
 package com.afdemp.wellness.controllers;
 
-import com.afdemp.wellness.entities.Order$;
+import com.afdemp.wellness.entities.Purchase;
 import com.afdemp.wellness.service.OrderService;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,7 +25,7 @@ public class AdminControllerREST {
     @RequestMapping(value = {"/orders/{something}"}, method = RequestMethod.GET)
     public ResponseEntity<Map<String, Object>> getOrders(@PathVariable String something) {
 
-        List<Order$> orders = new ArrayList();
+        List<Purchase> orders = new ArrayList();
         Map<String, Object> response = new HashMap();
 
         switch (something) {
@@ -39,7 +39,7 @@ public class AdminControllerREST {
                 break;
             default:
                 try {
-                    Order$ o = orderService.getOrderById(Integer.parseInt(something));
+                    Purchase o = orderService.getOrderById(Integer.parseInt(something));
                     // JSON https://api.myjson.com/bins/1d8v3h
                     orders.add(o);
                 } catch (NumberFormatException e) {

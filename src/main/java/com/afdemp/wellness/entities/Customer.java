@@ -58,7 +58,7 @@ public class Customer implements Serializable {
     private String phoneNumber;
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer", fetch = FetchType.LAZY)
-    private List<Order$> orderList;
+    private List<Purchase> orderList;
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer", fetch = FetchType.LAZY)
     private List<User> userList;
@@ -138,11 +138,11 @@ public class Customer implements Serializable {
     }
 
     @XmlTransient
-    public List<Order$> getOrderList() {
+    public List<Purchase> getOrderList() {
         return orderList;
     }
 
-    public void setOrderList(List<Order$> orderList) {
+    public void setOrderList(List<Purchase> orderList) {
         this.orderList = orderList;
     }
 

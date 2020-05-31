@@ -1,9 +1,8 @@
 
 package com.afdemp.wellness.controllers;
 
-import com.afdemp.wellness.dao.OrderDao;
 import com.afdemp.wellness.entities.Customer;
-import com.afdemp.wellness.entities.Order$;
+import com.afdemp.wellness.entities.Purchase;
 import com.afdemp.wellness.service.AppService;
 import com.afdemp.wellness.service.CustomerService;
 import java.util.List;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import com.afdemp.wellness.dao.IPurchase;
 
 
 @Controller
@@ -30,7 +30,7 @@ public class CustomerController {
     CustomerService customerService;
     
     @Autowired
-    OrderDao odao;
+    Purchase odao;
     
     @RequestMapping(value = {"/customers"}, method = RequestMethod.GET)
     public String getProfile(ModelMap model) {
@@ -90,7 +90,7 @@ public class CustomerController {
     public String getOrders(ModelMap model) {
             String username = appService.getPrincipal();
             int id = customerService.getCustomerBySsoId(username).getCustomerId();
-            List<Order$> orders = odao.getOrdersForCustomerById(id);
+            List<Purchase> orders = odao.getOrdersForCustomerById(id);
             model.addAttribute("orders",orders);
             model.addAttribute("loggedinuser", appService.getPrincipal());
             model.addAttribute("pagetitle", "My orders");
