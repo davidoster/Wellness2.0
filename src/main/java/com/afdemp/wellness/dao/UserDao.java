@@ -18,9 +18,7 @@ public interface UserDao {
 	
 	List<User> findAllUsers();
         
-        ///// Extra //////////////
-        
-        //public boolean createAccount(User u); // einai to save stin ousia
+      
         
         public User getAccountByCustomomerId(int id);
         

@@ -20,12 +20,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 
-//        private static SessionFactory sessionFactory;
-//        private Session session;
+
     static final Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
-    //Tested --> Works fine !! Make sure to initialize nested lists in customer field if you have to
-    //Explanation: User contains UserProfileList (Lazily initialized) and a Customer object (contains lists that are Lazily initialized) and this Customer objects contains... etc etc
-    //If the User toString prints all those objects you have to manually initialize them with the Hibernate.initialize method
+   
 
     public User findById(int id) {
         User user = getByKey(id);
@@ -34,7 +31,7 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
         }
         return user;
     }
-    //Tested --> Works fine ! Again be aware of the nested Lazily initialized lists
+    
 
     public User findBySSO(String sso) {
         logger.info("SSO : {}", sso);
@@ -46,7 +43,7 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
         }
         return user;
     }
-    // Tested --> works fine ! Again the same
+    
 
     @SuppressWarnings("unchecked")
     public List<User> findAllUsers() {
@@ -61,12 +58,11 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
         }
         return users;
     }
-    // tested --> works
-
+  
     public void save(User user) {
         persist(user);
     }
-    // tested --> works
+   
 
     public void deleteBySSO(String sso) {
         Criteria crit = createEntityCriteria();
@@ -75,22 +71,17 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
         delete(user);
     }
 
-    /////////////// Extra ////////
-    // Tested --> Works fine !!
+   
     @Override
     public User getAccountByCustomomerId(int id) {
-//            Criteria crit = getSession().createCriteria(User.class);
-//            Criteria suppCrit = crit.createCriteria("customer");
-//            suppCrit.add(Restrictions.eq("customer.customerId",id));
-//            User u = (User)crit.uniqueResult();
-//            return u;
+
         Criteria crit = createEntityCriteria();
         crit.add(Restrictions.eq("customer.customerId", id));
         User user = (User) crit.uniqueResult();
         return user;
     }
 
-    // tested --> works
+  
     @Override
     public boolean updateAccount(User u) {
         try {

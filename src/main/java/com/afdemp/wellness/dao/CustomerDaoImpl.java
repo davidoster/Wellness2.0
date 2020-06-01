@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class CustomerDaoImpl extends AbstractDao<Integer, Customer> implements CustomerDao {
     
-    // tested --> works
+    
     @Override
     public boolean createCustomer(Customer c) {
         try {
@@ -40,7 +40,7 @@ public class CustomerDaoImpl extends AbstractDao<Integer, Customer> implements C
         return c;
     }
     
-    // tested --> works
+ 
     @Override
     public Customer getCustomerById(int id) {
         Customer c = (Customer) getByKey(id);

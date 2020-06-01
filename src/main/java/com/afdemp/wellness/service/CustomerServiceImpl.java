@@ -13,10 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- *
- * @author samsung np350
- */
+
 @Service("customerService")
 @Transactional
 public class CustomerServiceImpl implements CustomerService {
@@ -59,14 +56,7 @@ public class CustomerServiceImpl implements CustomerService {
         return dao.getCustomerBySsoId(ssoId);
     }
     
-    /**
-     * This method updates an existing customer, and if succeeds it returns
-     * the updated customer. It it fails it returns null. It updates the Address,
-     * First name, Last name and Phone number.
-     * @param newCustomer
-     * @param oldCustomer
-     * @return 
-     */
+   
     @Override
     public Customer updateCustomer(Customer newCustomer, Customer oldCustomer) {
         oldCustomer.setAddress(newCustomer.getAddress());
