@@ -65,29 +65,29 @@ public class AppController {
     @RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
     public String goHome(ModelMap model) {
         model.addAttribute("loggedinuser", appService.getPrincipal());
-        model.addAttribute("pagetitle", "Pand-Eco");
+        model.addAttribute("pagetitle", "Inspired");
         return "homepage";
     }
 
     @RequestMapping(value = {"/categories/"}, method = RequestMethod.GET)
     public String goCategories(ModelMap model) {
         model.addAttribute("loggedinuser", appService.getPrincipal());
-        model.addAttribute("pagetitle", "Pand-Eco");
-        return "view_categories";
+        model.addAttribute("pagetitle", "Inspired");
+        return "categories";
     }
 
     @RequestMapping(value = {"/contact"}, method = RequestMethod.GET)
     public String goContact(ModelMap model) {
         model.addAttribute("loggedinuser", appService.getPrincipal());
         model.addAttribute("pagetitle", "Contact");
-        return "view_contact";
+        return "contact";
     }
 
     @RequestMapping(value = {"/about"}, method = RequestMethod.GET)
     public String goAbout(ModelMap model) {
         model.addAttribute("loggedinuser", appService.getPrincipal());
         model.addAttribute("pagetitle", "About");
-        return "view_about";
+        return "about";
     }
 
     /**
@@ -229,7 +229,7 @@ public class AppController {
             model.addAttribute("pagetitle", "Login");
             return "login";
         } else {
-            return "redirect:/home";
+            return "redirect:/homepage";
         }
     }
 
