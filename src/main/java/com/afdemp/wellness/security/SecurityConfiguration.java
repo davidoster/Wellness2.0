@@ -38,7 +38,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.headers().frameOptions().sameOrigin();
         http.authorizeRequests()
-                .antMatchers("/", "/register", "/about", "/contact", "/products/**", "/orders/**")
+                .antMatchers("/", "/register", "/about", "/contact", "/products/**", "/purchases/**")
                 .permitAll()
                 .antMatchers("/user/**")
                 .access("hasRole('USER') or hasRole('ADMIN')")

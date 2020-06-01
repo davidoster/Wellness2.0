@@ -56,44 +56,6 @@ public class CustomerController {
         return "updateprofile";
     }
 
-    @RequestMapping(value = {"/profile/save"}, method = RequestMethod.POST)
-    public String saveProfile(@Valid Customer customer, BindingResult result,
-            ModelMap model, @RequestParam("oldemail") String oldemail) {
 
-        if (result.hasErrors()) {
-            model.addAttribute("loggedinuser", appService.getPrincipal());
-            model.addAttribute("pagetitle", "Edit profile");
-            return "updateprofile";
-        }
-
-        if (!oldemail.equals(customer.getEmail())) {
-            if (!customerService.isEmailUnique(customer.getCustomerId(), customer.getEmail())) {
-                model.addAttribute("emailnotUnique", "Email " + customer.getEmail()
-                        + " already exists. Please fill in a different email.");
-                model.addAttribute("loggedinuser", appService.getPrincipal());
-                model.addAttribute("pagetitle", "Edit profile");
-                return "updateprofile";
-            }
-        }
-
-        if (customerService.updateCustomer(customer)) {
-            model.addAttribute("success", "Your info was updated successfully.");
-        } else {
-            model.addAttribute("success", "Your info was not updated.");
-        }
-        model.addAttribute("loggedinuser", appService.getPrincipal());
-        model.addAttribute("pagetitle", "My profile");
-        return "customer_profile";
-    }
-
-    @RequestMapping(value = {"/profile/myorders"}, method = RequestMethod.GET)
-    public String getOrders(ModelMap model) {
-            String username = appService.getPrincipal();
-            int id = customerService.getCustomerBySsoId(username).getCustomerId();
-            List<Purchase> orders = odao.getPurchasesForCustomerById(id);
-            model.addAttribute("orders",orders);
-            model.addAttribute("loggedinuser", appService.getPrincipal());
-            model.addAttribute("pagetitle", "My orders");
-        return "myorders";
-    }
+    
 }

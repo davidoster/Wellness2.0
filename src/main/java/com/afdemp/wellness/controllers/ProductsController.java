@@ -24,8 +24,15 @@ public class ProductsController {
     AppService appService;
 
     @Autowired
-    ProductsService productsService;    
-      
+    ProductsService productsService;      @RequestMapping (value = {  "/productsList"}, method = RequestMethod.GET)
+    public String getAllProducts(ModelMap view){
+        List<Product> products = productsService.getAllProducts();
+        view.addAttribute("products", products);
+        view.addAttribute("loggedinuser", appService.getPrincipal());     
+        return "listofproducts";
+    
+}
+    
     @RequestMapping(value = {"", "/", "/{something}"}, method = RequestMethod.GET)
     public String getProductsOfCategory(ModelMap model, @ModelAttribute("message") String message) {
         model.addAttribute("message", message);
@@ -34,13 +41,6 @@ public class ProductsController {
         return "view_product_details";
     }
     
-    @RequestMapping (value = { "/", "/productsList"}, method = RequestMethod.GET)
-    public String getAllProducts(ModelMap view){
-        List<Product> products = productsService.getAllProducts();
-        view.addAttribute("products", products);
-        return "listofproducts";
-    
-}
-    
+  
 
 }

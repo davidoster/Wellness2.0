@@ -3,6 +3,7 @@ package com.afdemp.wellness.dao;
 import com.afdemp.wellness.entities.Product;
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,8 +15,11 @@ public class ProductDaoImpl extends AbstractDao<Integer,Product> implements Prod
 
     @Override
     public List<Product> getAllProducts() {
+        
         Criteria criteria = createEntityCriteria();
-        return (List<Product>) criteria.list();
+        List<Product> products = (List<Product>) criteria.list();
+        
+        return  products;
     }
 
     @Override
@@ -23,9 +27,7 @@ public class ProductDaoImpl extends AbstractDao<Integer,Product> implements Prod
         Criteria crit = createEntityCriteria();
         crit.add(Restrictions.eq("category", category));
 	List<Product> list = (List<Product>)crit.list();
-//         for (Product p : list){
-//            Hibernate.initialize(p.getOrderdetailsList());
-//        }
+
         return list;
     }
 
@@ -67,16 +69,5 @@ public class ProductDaoImpl extends AbstractDao<Integer,Product> implements Prod
         }
     }
     
-//    @Override
-//    public boolean reduceProductStock(int id,int quantity){
-//        try{
-//            Product p = getByKey(id);
-//            p.setStock(p.getStock()-quantity);
-//            update(p);
-//            return true;
-//        }catch(Exception e){
-//            return false;
-//        }
-//    }
-    
+
 }
