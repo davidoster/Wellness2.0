@@ -77,7 +77,7 @@ public class PurchaseController {
         o.setPending((short) 1);
 //     
         model.addAttribute("purchase", p);
-        model.addAttribute("action", "order/save");
+        model.addAttribute("action", "purchase/save");
         model.addAttribute("registered", isRegistered);
         model.addAttribute("loggedinuser", appService.getPrincipal());
         return "buynow";
