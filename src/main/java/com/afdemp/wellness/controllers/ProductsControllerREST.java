@@ -32,9 +32,9 @@ public class ProductsControllerREST {
             case "all":
                 products = productsService.getAllProducts();
                 break;
-            case "cup":
-            case "straw":
-            case "toothbrush":
+            case "nutriton":
+            case "fitness":
+            
                 products = productsService.getProductByCategory(category);
                 response.put("category", category);
                 break;
