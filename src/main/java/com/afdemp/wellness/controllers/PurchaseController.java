@@ -66,23 +66,21 @@ public class PurchaseController {
         List<PurchaseDetails> list = new ArrayList();
         o.setPurchaseDetailsList(list);
 
-        // se synthikes agoras pollaplwn proiontwn tha eftiaxna tosa
-        // orderdetails objects osa kai ta diaforerikou eidous products tis paraggelias
+        
         PurchaseDetails odetails = new PurchaseDetails();
         odetails.setProduct(p);
-//        list.add(odetails);
+//      list.add(odetails);
 //        System.out.println("orderDetailsList:"+ list);
 
         o.addPurchaseDetailsToList(odetails);
         o.setCustomer(c);
         o.setPending((short) 1);
-//        Hibernate.initialize(o.getOrderDetailsList());
-        // mesa stin post na setarw kai date !
-        model.addAttribute("order", o);
+//     
+        model.addAttribute("purchase", p);
         model.addAttribute("action", "order/save");
         model.addAttribute("registered", isRegistered);
         model.addAttribute("loggedinuser", appService.getPrincipal());
-        return "view_buynow";
+        return "buynow";
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
@@ -94,43 +92,40 @@ public class PurchaseController {
         if (result.hasErrors()) {
             model.addAttribute("message", "problem");
             model.addAttribute("loggedinuser", appService.getPrincipal());
-            return "home";
+            return "homepage";
         }
         
-        /**
-         * If the Order Id is null, then the new order is processed.
-         * If not, then an existing order is updated.
-         */
+       
         if (purchase.getId() == null) {
             Customer c = purchase.getCustomer();
             // If the customer buys as a visitor, he has null id
             if (c.getCustomerId() == null) {
-                // Checking if the visitor customer exists in the database, by the email he gave
+               
                 Customer existingCustomer = customerService.getCustomerByEmail(c.getEmail());
-                if (existingCustomer != null) {                                               // if the visitor customer already exists
-                    existingCustomer = customerService.updateCustomer(c, existingCustomer);    // updating customer's info
-                    c.setCustomerId(existingCustomer.getCustomerId());                        // setting customer for order
+                if (existingCustomer != null) {                                               
+                    existingCustomer = customerService.updateCustomer(c, existingCustomer);  
+                    c.setCustomerId(existingCustomer.getCustomerId());                       
                 } else {
-                    c.setCustomerId(customerService.saveCustomer(c));                        // setting customer for order
+                    c.setCustomerId(customerService.saveCustomer(c));                  
                     purchase.setCustomer(c);
                 }
             }
-            //set order time
+            //set purchase time
             Date date = new Date(System.currentTimeMillis());
             purchase.setDate(date);
             // create a list of details
             int orderLength = pid.size();
             List<PurchaseDetails> list = new ArrayList();
             PurchaseDetails od;
-            for (int i = 0; i < orderLength; i++) {
+            for (int i = 0; i < purchaseLength; i++) {
                 od = new PurchaseDetails();
                 od.setPurchase(purchase);
                 list.add(od);
             }
             // link the list with the order 
             purchase.setPurchaseDetailsList(list);
-            // for every element in the list of order details we have to set the product and the quantity
-            // theoretically we have a list of products and a list of quantitiew from the requests param
+            // for every element in the list of purchase details we have to set the product and the quantity
+            // theoretically we have a list of products and a list of quantities from the requests param
             // so this code might be expandable for an order with multiple products
             // for now it has only been tested with one
             Product p;
@@ -138,12 +133,12 @@ public class PurchaseController {
 //            for (int i = 0; i < orderLength; i++) {
 //                p = productService.getProductById(pid.get(i));
 //                q = quantity.get(i);
-//                order.getOrderDetailsList().get(i).setProduct(p);
-//                order.getOrderDetailsList().get(i).setQuantity(q);
+//                order.getPurchaseDetailsList().get(i).setProduct(p);
+//                order.getPurchaseDetailsList().get(i).setQuantity(q);
 //                p.setStock(p.getStock() - q);
 //                productService.updateProduct(p);
 //            }
-            boolean created = orderService.createPurchase(purchase);
+            boolean created = purchaseService.createPurchase(purchase);
             if (created) {
                 model.addAttribute("customerName", purchase.getCustomer().getFirstName());
                 model.addAttribute("orderNumber", purchase.getId());     
@@ -156,9 +151,9 @@ public class PurchaseController {
                 model.addAttribute("loggedinuser", appService.getPrincipal());
             }
 
-            return "view_order_success";
+            return "purchase_success";
             /**
-             * If Order Id is NOT null, then an existing order is updated
+             * If Purchase Id is NOT null, then an existing order is updated
              * by the administrator.
              */
         } else {
@@ -173,19 +168,16 @@ public class PurchaseController {
                 model.addAttribute("message", "The order was updated successfully");
                 model.addAttribute("update", true);
                 model.addAttribute("loggedinuser", appService.getPrincipal());
-                return "view_order_success";
+                return "purchase_success";
             } else {
                 model.addAttribute("message", "Sorry, the order failed to update.");
                 model.addAttribute("update", true);
                 model.addAttribute("loggedinuser", appService.getPrincipal());
-                return "view_order_success";
+                return "purchase_success";
             }
         }
     }
-//    @ModelAttribute("order")
-//    public IPurchaseDao inorder(){
-//        return new IPurchaseDao();
-//    }
+
 
     
 }
