@@ -26,7 +26,7 @@ import com.afdemp.wellness.dao.IPurchaseDao;
 import com.afdemp.wellness.service.IPurchaseService;
 
 @Controller
-@RequestMapping("/order")
+@RequestMapping("/purchase")
 public class PurchaseController {
     
     @Autowired
@@ -48,7 +48,7 @@ public class PurchaseController {
     IPurchaseDao odao;
 
     @RequestMapping(value = {"/buy/{id}"}, method = RequestMethod.GET)
-    public String newOrder(ModelMap model, @PathVariable int id) {
+    public String newPurchase(ModelMap model, @PathVariable int id) {
         Customer c;
         boolean isRegistered;
         String username = appService.getPrincipal();
@@ -59,7 +59,7 @@ public class PurchaseController {
             c = customerService.getCustomerBySsoId(username);
             isRegistered = true;
         }
-        Purchase o = new Purchase();
+        Purchase p = new Purchase();
         Product p = productService.getProductById(id);
         
 
@@ -84,7 +84,7 @@ public class PurchaseController {
     }
 
     @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
-    public String newOrder(@ModelAttribute("order") Purchase purchase,
+    public String newPurchase(@ModelAttribute("order") Purchase purchase,
             @RequestParam(value = "pid", required = false) List<Integer> pid,
             @RequestParam(value = "quantity", required = false) List<Integer> quantity,
             BindingResult result, ModelMap model) {
@@ -141,7 +141,7 @@ public class PurchaseController {
             boolean created = purchaseService.createPurchase(purchase);
             if (created) {
                 model.addAttribute("customerName", purchase.getCustomer().getFirstName());
-                model.addAttribute("orderNumber", purchase.getId());     
+                model.addAttribute("purchaseNumber", purchase.getId());     
                 model.addAttribute("update", false);
                 model.addAttribute("loggedinuser", appService.getPrincipal());
             } else {
@@ -165,7 +165,7 @@ public class PurchaseController {
             }
             
             if(orderService.updatePurchase(purchase)) {
-                model.addAttribute("message", "The order was updated successfully");
+                model.addAttribute("message", "The purchase was updated successfully");
                 model.addAttribute("update", true);
                 model.addAttribute("loggedinuser", appService.getPrincipal());
                 return "purchase_success";
