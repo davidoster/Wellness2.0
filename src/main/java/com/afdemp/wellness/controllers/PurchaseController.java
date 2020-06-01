@@ -36,7 +36,7 @@ public class PurchaseController {
     CustomerService customerService;
     
     @Autowired
-    IPurchaseService orderService;
+    IPurchaseService purchaseService;
 
     @Autowired
     ProductsService productService;
@@ -68,9 +68,9 @@ public class PurchaseController {
 
         
         PurchaseDetails odetails = new PurchaseDetails();
-        odetails.setProduct(p);
+        purchaseDetails.setProduct(p);
 //      list.add(odetails);
-//        System.out.println("orderDetailsList:"+ list);
+//        System.out.println("purchaseDetailsList:"+ list);
 
         o.addPurchaseDetailsToList(odetails);
         o.setCustomer(c);
@@ -122,7 +122,7 @@ public class PurchaseController {
                 od.setPurchase(purchase);
                 list.add(od);
             }
-            // link the list with the order 
+            // link the list with the purchase 
             purchase.setPurchaseDetailsList(list);
             // for every element in the list of purchase details we have to set the product and the quantity
             // theoretically we have a list of products and a list of quantities from the requests param
