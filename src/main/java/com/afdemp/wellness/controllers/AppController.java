@@ -146,7 +146,7 @@ public class AppController {
         userService.saveUser(user);
 
         model.addAttribute("success", "Dear " + user.getSsoId() + ", you have registered successfully.");
-        model.addAttribute("path", "4; URL=/BioEShop/");
+        model.addAttribute("path", "4; URL=/Wellness/");
         return "registrationsuccess";
     }
 
