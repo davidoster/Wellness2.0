@@ -22,12 +22,13 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @PropertySource(value = { "classpath:application.properties" })
 public class HibernateConfiguration {
 
+    private static LocalSessionFactoryBean sessionFactory = null;
     @Autowired
     private Environment environment;
 
     @Bean
     public LocalSessionFactoryBean sessionFactory() {
-        LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
+        sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
         sessionFactory.setPackagesToScan(new String[] { "afdemp.wellness.entities" });
         sessionFactory.setHibernateProperties(hibernateProperties());
@@ -59,5 +60,7 @@ public class HibernateConfiguration {
        txManager.setSessionFactory(s);
        return txManager;
     }
+    
+
 }
 
