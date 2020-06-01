@@ -31,14 +31,14 @@ public class ProductsController {
         model.addAttribute("message", message);
         model.addAttribute("pagetitle", "Products");
         model.addAttribute("loggedinuser", appService.getPrincipal());        
-        return "view_product";
+        return "view_product_details";
     }
     
     @RequestMapping (value = { "/", "/productsList"}, method = RequestMethod.GET)
     public String getAllProducts(ModelMap view){
         List<Product> products = productsService.getAllProducts();
         view.addAttribute("products", products);
-        return ("listofproducts");
+        return "listofproducts";
     
 }
     
