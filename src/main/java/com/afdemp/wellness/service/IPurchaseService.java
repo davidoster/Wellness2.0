@@ -8,10 +8,7 @@ package com.afdemp.wellness.service;
 import com.afdemp.wellness.entities.Purchase;
 import java.util.List;
 
-/**
- *
- * @author giorgos
- */
+
 public interface IPurchaseService {
     
     public boolean createPurchase(Purchase purchase);
