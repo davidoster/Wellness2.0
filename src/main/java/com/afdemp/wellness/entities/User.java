@@ -61,12 +61,7 @@ public class User implements Serializable {
     @JoinColumn(name = "customer_id", referencedColumnName = "customer_id", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     private Customer customer;
-    /*
-    πρόσθεσα το cascade=CascadeType.ALL γιατί όταν πήγαινα να καταχωρήσω τη regitration form έβγαζε error
-    org.hibernate.TransientPropertyValueException: Not-null property references a transient value
-    https://stackoverflow.com/questions/19074278/not-null-property-references-a-transient-value-transient-instance-must-be-save
-    https://stackoverflow.com/questions/32794600/not-null-property-references-a-transient-value-transient-instance-must-be-saved?rq=1
-    */
+   
     
     
     public User() {
@@ -134,7 +129,7 @@ public class User implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
+    
         if (!(object instanceof User)) {
             return false;
         }
