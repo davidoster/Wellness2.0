@@ -92,9 +92,8 @@ public class AdminController {
             Product p = productService.getProductById(Integer.parseInt(id));
             String category = p.getCategory();
             model.addAttribute("p", p);
-            model.addAttribute("cupSelected", category.equals("Cup"));
-            model.addAttribute("strawSelected", category.equals("Straw"));
-            model.addAttribute("toothbrushSelected", category.equals("Toothbrush"));
+            model.addAttribute("fitnessSelected", category.equals("Fitness"));
+            model.addAttribute("nutritionSelected", category.equals("Nutrition"));
             model.addAttribute("edit", true);
             model.addAttribute("loggedinuser", appService.getPrincipal());
             model.addAttribute("pagetitle", "Edit product");
@@ -125,12 +124,12 @@ public class AdminController {
         }
 
         if ((p.getProductId() == 0) && (productService.addProduct(p))) {
-            // model.addAttribute("message", "Entry done");
+          
         } else if (productService.updateProduct(p)) {
             return "redirect:../../products/" + p.getProductId();
         }
 
-        //model.addAttribute("message", "There was a problem");
+       
         return "redirect:../../products/";
     }
 
