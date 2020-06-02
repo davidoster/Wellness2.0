@@ -23,13 +23,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Entity
 @Transactional
-@Table(name = "USER_PROFILE", catalog = "wellness2.0", schema = "", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"type"})})
+@Table(name = "USER_PROFILE", catalog = "wellness2.0", schema = "")
+//, uniqueConstraints = {@UniqueConstraint(columnNames = {"type"})})
 //@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "UserProfile.findAll", query = "SELECT u FROM UserProfile u")
-    , @NamedQuery(name = "UserProfile.findById", query = "SELECT u FROM UserProfile u WHERE u.id = :id")
-    , @NamedQuery(name = "UserProfile.findByType", query = "SELECT u FROM UserProfile u WHERE u.type = :type")})
+//@NamedQueries({
+//    @NamedQuery(name = "UserProfile.findAll", query = "SELECT u FROM UserProfile u")
+//    , @NamedQuery(name = "UserProfile.findById", query = "SELECT u FROM UserProfile u WHERE u.id = :id")
+//    , @NamedQuery(name = "UserProfile.findByType", query = "SELECT u FROM UserProfile u WHERE u.type = :type")})
 public class UserProfile implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -58,7 +58,7 @@ public class User implements Serializable {
         @JoinColumn(name = "user_profile_id", referencedColumnName = "id", nullable = false)})
     @ManyToMany(fetch = FetchType.LAZY)
     private List<UserProfile> userProfileList;
-    @JoinColumn(name = "customer_id", referencedColumnName = "customer_id", nullable = false)
+    @JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     private Customer customer;
    

@@ -236,7 +236,7 @@
             <div><a href="<c:url value='/admin/profile/update'/>" class="btnUpdate">Edit</a></div>
         </c:if>
         <c:if test="${!adminForAdmin}">
-            <div><a href="<c:url value='/admin/customers/update/${customer.customerId}' />" class="btnUpdate">Edit</a></div>
+            <div><a href="<c:url value='/admin/customers/update/${customer.Id}' />" class="btnUpdate">Edit</a></div>
         </c:if>
 
     </sec:authorize>

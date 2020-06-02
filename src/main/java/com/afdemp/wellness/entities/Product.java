@@ -1,4 +1,4 @@
-package com.afdemp.wellness.entities;
+    package com.afdemp.wellness.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;

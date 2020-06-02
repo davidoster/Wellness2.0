@@ -24,22 +24,26 @@ public class ProductsController {
     AppService appService;
 
     @Autowired
-    ProductsService productsService;      @RequestMapping (value = {  "/productsList"}, method = RequestMethod.GET)
+    ProductsService productsService;      
+    @RequestMapping (value = {  "/productsList"}, method = RequestMethod.GET)
     public String getAllProducts(ModelMap view){
         List<Product> products = productsService.getAllProducts();
+            for (Product product : products) {
+                System.out.println(product);
+            }
         view.addAttribute("products", products);
         view.addAttribute("loggedinuser", appService.getPrincipal());     
         return "listofproducts";
     
 }
     
-    @RequestMapping(value = {"", "/", "/{something}"}, method = RequestMethod.GET)
-    public String getProductsOfCategory(ModelMap model, @ModelAttribute("message") String message) {
-        model.addAttribute("message", message);
-        model.addAttribute("pagetitle", "Products");
-        model.addAttribute("loggedinuser", appService.getPrincipal());        
-        return "view_product_details";
-    }
+//    @RequestMapping(value = {"", "/", "/{something}"}, method = RequestMethod.GET)
+//    public String getProductsOfCategory(ModelMap model, @ModelAttribute("message") String message) {
+//        model.addAttribute("message", message);
+//        model.addAttribute("pagetitle", "Products");
+//        model.addAttribute("loggedinuser", appService.getPrincipal());        
+//        return "view_product_details";
+//    }
     
   
 

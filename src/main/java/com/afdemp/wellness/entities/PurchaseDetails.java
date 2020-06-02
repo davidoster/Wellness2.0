@@ -39,10 +39,10 @@ public class PurchaseDetails implements Serializable {
     @Basic(optional = false)
     private int quantity;
     @JsonIgnore
-    @JoinColumn(name = "purchase_id", referencedColumnName = "purchase_id", nullable = false)
+    @JoinColumn(name = "purchase_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Purchase purchase;
-    @JoinColumn(name = "product_id", referencedColumnName = "product_id", nullable = false)
+    @JoinColumn(name = "product_id", referencedColumnName = "id", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Product product;
 
